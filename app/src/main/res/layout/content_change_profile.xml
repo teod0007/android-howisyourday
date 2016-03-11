@@ -9,26 +9,25 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".activities.CreateProfileActivity"
-    tools:showIn="@layout/activity_create_profile">
+    tools:context=".activities.ChangeProfileActivity"
+    tools:showIn="@layout/activity_change_profile">
 
-    <Button
+    <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/button_create"
-        android:id="@+id/btnCreateProfile"
-        android:layout_alignParentBottom="true"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="Large Text"
+        android:id="@+id/txtChangeProfile"
+        android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginBottom="105dp" />
+        android:textSize="80sp"
+        android:textIsSelectable="false" />
 
-    <EditText
+    <ListView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:inputType="textPersonName"
-        android:text="@string/text_field_name"
-        android:ems="10"
-        android:id="@+id/txtFieldName"
-        android:layout_marginBottom="24dp"
-        android:layout_above="@+id/btnCreateProfile"
-        android:layout_centerHorizontal="true" />
+        android:id="@+id/lstProfiles"
+        android:layout_below="@+id/txtChangeProfile"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true" />
 </RelativeLayout>

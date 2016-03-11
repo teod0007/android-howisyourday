@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".MainActivity"
+            android:name=".activities.MainActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -20,24 +20,44 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CreateProfileActivity"
+            android:name=".activities.CreateProfileActivity"
             android:label="@string/title_activity_create_profile"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             tools:ignore="UnusedAttribute">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.prjproject.tcc.MainActivity" />
+                android:value=".activities.MainActivity" />
         </activity>
         <activity
-            android:name=".BeginRoutineActivity"
+            android:name=".activities.BeginRoutineActivity"
             android:label="@string/title_activity_begin_routine"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".activities.MainActivity"
             android:theme="@style/AppTheme.NoActionBar"
             tools:ignore="UnusedAttribute">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.prjproject.tcc.MainActivity" />
+                android:value=".activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.ChangeProfileActivity"
+            android:label="@string/title_activity_change_profile"
+            android:parentActivityName=".activities.MainActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="UnusedAttribute">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".activities.MainActivity" />
+        </activity>
+        <activity
+            android:name=".activities.ChooseActivitiesActivity"
+            android:label="@string/title_activity_choose_activities"
+            android:parentActivityName=".activities.BeginRoutineActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="UnusedAttribute">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.prjproject.tcc.activities.BeginRoutineActivity" />
         </activity>
     </application>
 

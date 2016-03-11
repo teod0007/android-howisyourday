@@ -12,4 +12,6 @@
     <string name="button_future">Futuro</string>
     <string name="text_field_name">Nome</string>
     <string name="title_activity_begin_routine">BeginRoutineActivity</string>
+    <string name="title_activity_change_profile">ChangeProfile</string>
+    <string name="title_activity_choose_activities">ChooseActivitiesActivity</string>
 </resources>

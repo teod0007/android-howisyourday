@@ -1,4 +1,4 @@
-package com.prjproject.tcc;
+package com.prjproject.tcc.activities;
 
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
@@ -7,12 +7,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-public class BeginRoutineActivity extends AppCompatActivity {
+import com.prjproject.tcc.R;
+
+public class ChangeProfileActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_begin_routine);
+        setContentView(R.layout.activity_change_profile);
     }
 
 }
