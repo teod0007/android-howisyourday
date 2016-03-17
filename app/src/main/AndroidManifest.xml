@@ -59,6 +59,8 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.prjproject.tcc.activities.BeginRoutineActivity" />
         </activity>
+        <activity android:name=".utils.AndroidDatabaseManager"
+            android:theme="@style/Theme.AppCompat.Light"/>
     </application>
 
 </manifest>

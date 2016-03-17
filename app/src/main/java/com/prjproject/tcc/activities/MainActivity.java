@@ -5,8 +5,10 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.prjproject.tcc.R;
+import com.prjproject.tcc.utils.AndroidDatabaseManager;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -23,10 +25,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Button btnNewProfile = (Button) findViewById(R.id.btnNewProfile);
         Button btnChangeProfile = (Button) findViewById(R.id.btnChangeProfile);
         Button btnBeginRoutine = (Button) findViewById(R.id.btnBeginRoutine);
+        TextView txtTitle = (TextView) findViewById(R.id.txtTitle);
 
         btnNewProfile.setOnClickListener(this);
         btnChangeProfile.setOnClickListener(this);
         btnBeginRoutine.setOnClickListener(this);
+        txtTitle.setOnClickListener(this);
+
     }
 
     //Click handling
@@ -43,6 +48,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             case R.id.btnBeginRoutine:
                 btnBeginRoutineClick();
                 break;
+            case R.id.txtTitle:
+                startDatabaseManager();
+                break;
         }
     }
 
@@ -57,6 +65,16 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     public void btnBeginRoutineClick(){
         Intent intent = new Intent(getApplicationContext(), BeginRoutineActivity.class);
         startActivity(intent);
+    }
+
+    /////////////////////////////
+    ////////DATABASE MANAGER/////
+    /////////////////////////////
+
+    public void startDatabaseManager() {
+
+        Intent dbmanager = new Intent(getApplicationContext(),AndroidDatabaseManager.class);
+        startActivity(dbmanager);
     }
 
 
