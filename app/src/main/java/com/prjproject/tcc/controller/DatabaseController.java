@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.prjproject.tcc.model.Profile;
 import com.prjproject.tcc.persist.CreateDatabase;
 
 import java.util.List;
@@ -26,7 +27,7 @@ public class DatabaseController {
         return false;
     }
 
-    public boolean insertDays(){
+    public boolean insertDay(){
         return false;
     }
 
@@ -34,8 +35,17 @@ public class DatabaseController {
         return false;
     }
 
-    public boolean insertProfile(){
-        return false;
+    public boolean insertProfile(Profile p){
+
+        ContentValues values;
+        long result;
+        db = database.getWritableDatabase();
+        values = new ContentValues();
+        values.put("name", p.getName());
+        result = db.insert("profile", null, values);
+        db.close();
+
+        return result > 0;
     }
 
     public Cursor readActivities(){
