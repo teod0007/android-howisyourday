@@ -16,7 +16,7 @@ import java.util.ArrayList;
 public class CreateDatabase extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "tcc.db";
-    private static final int VERSION = 1;
+    private static final int VERSION = 2;
 
 
     public CreateDatabase(Context context){
@@ -27,7 +27,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
     {
         String sql = "CREATE TABLE profile(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "name TEXT" +
+                "name TEXT UNIQUE" +
                 ")";
         db.execSQL(sql);
         sql = "CREATE TABLE activity(" +
@@ -49,9 +49,9 @@ public class CreateDatabase extends SQLiteOpenHelper {
         sql = "CREATE TABLE day(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "profile_id INTEGER," +
-                "day_date DATE," +
                 "isFuture BOOLEAN," +
-                "FOREIGN KEY(profile_id) REFERENCES profile(_id) ON DELETE CASCADE" +
+                "day_date DATE DEFAULT CURRENT_DATE," +
+                "FOREIGN KEY(profile_id) REFERENCES profile(_id) ON DELETE CASCADE ON UPDATE CASCADE" +
                 ")";
         db.execSQL(sql);
 

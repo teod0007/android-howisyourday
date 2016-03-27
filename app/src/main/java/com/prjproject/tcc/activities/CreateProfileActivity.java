@@ -1,6 +1,8 @@
 package com.prjproject.tcc.activities;
 
+import android.content.Intent;
 import android.content.res.Resources;
+import android.database.Cursor;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -70,6 +72,13 @@ public class CreateProfileActivity extends AppCompatActivity implements View.OnC
     private void btnCreateClick() {
         if (validateFields()) {
             if(dbController.insertProfile(new Profile(edtFieldName.getText().toString()))){
+                Cursor c = dbController.readProfilePerName(edtFieldName.getText().toString());
+                String id = c.getString(c.getColumnIndexOrThrow("_id"));
+                String name = c.getString(c.getColumnIndexOrThrow("name"));
+                Intent intent = new Intent();
+                intent.putExtra("profile_id", id);
+                intent.putExtra("profile_name", name);
+                setResult(RESULT_OK, intent);
                 finish();
             }
             else{

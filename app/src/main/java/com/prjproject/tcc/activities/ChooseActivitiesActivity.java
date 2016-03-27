@@ -10,10 +10,14 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.GridView;
 import android.widget.ImageButton;
 
 import com.prjproject.tcc.R;
+import com.prjproject.tcc.adapters.GridAdapter;
 import com.prjproject.tcc.adapters.ImageAdapter;
+import com.prjproject.tcc.listeners.RecyclerItemClickListener;
+import com.prjproject.tcc.model.Activity;
 
 public class ChooseActivitiesActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -24,6 +28,26 @@ public class ChooseActivitiesActivity extends AppCompatActivity implements View.
         setupButtons();
         setupRecycleViewLayouts();
         setViewAdapters();
+        setRecycleViewListeners();
+    }
+
+    private void setRecycleViewListeners() {
+        RecyclerView listViewFood = (RecyclerView) findViewById(R.id.listViewFood);
+        RecyclerView listViewMedicine = (RecyclerView) findViewById(R.id.listViewMedicine);
+        RecyclerView listViewMisc = (RecyclerView) findViewById(R.id.listViewMisc);
+        RecyclerItemClickListener commonListener = new RecyclerItemClickListener(getApplicationContext(), new RecyclerItemClickListener.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(View view, int position) {
+                        Object activity =  (((ImageAdapter) ((RecyclerView) view.getParent()).getAdapter()).getItem(position));
+                        GridView gridViewActivities = (GridView)findViewById(R.id.gridViewActivities);
+                        ((GridAdapter)gridViewActivities.getAdapter()).addItem(activity);
+                    }
+        });
+        listViewFood.addOnItemTouchListener(commonListener);
+        listViewMedicine.addOnItemTouchListener(commonListener);
+        listViewMisc.addOnItemTouchListener(commonListener);
+
+
     }
 
     private void setupButtons() {
@@ -55,6 +79,8 @@ public class ChooseActivitiesActivity extends AppCompatActivity implements View.
         listViewMedicine.setAdapter(new ImageAdapter(null));
         RecyclerView listViewMisc = (RecyclerView) findViewById(R.id.listViewMisc);
         listViewMisc.setAdapter(new ImageAdapter(null));
+        GridView gridViewActivities = (GridView) findViewById(R.id.gridViewActivities);
+        gridViewActivities.setAdapter(new GridAdapter(getApplicationContext()));
 
     }
 

@@ -11,6 +11,8 @@ import com.prjproject.tcc.R;
 import com.prjproject.tcc.utils.AndroidDatabaseManager;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
+    String current_id = "";
+    String current_name = "";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,15 +58,32 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     public void btnNewProfileClick(){
         Intent intent = new Intent(getApplicationContext(), CreateProfileActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
     }
     public void btnChangeProfileClick(){
         Intent intent = new Intent(getApplicationContext(), ChangeProfileActivity.class);
-        startActivity(intent);
+        startActivityForResult(intent, 2);
     }
     public void btnBeginRoutineClick(){
         Intent intent = new Intent(getApplicationContext(), BeginRoutineActivity.class);
         startActivity(intent);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 2 || requestCode == 1) {
+            if(resultCode == RESULT_OK){
+                current_id = data.getStringExtra("profile_id");
+                current_name = data.getStringExtra("profile_name");
+
+                TextView tvLogin = (TextView)findViewById(R.id.tvProfileLogin);
+                Button btnBegin = (Button)findViewById(R.id.btnBeginRoutine);
+
+                tvLogin.setText("Olá "+current_name);
+                tvLogin.setVisibility(View.VISIBLE);
+                btnBegin.setEnabled(true);
+            }
+        }
     }
 
     /////////////////////////////

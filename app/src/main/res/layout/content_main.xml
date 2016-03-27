@@ -22,7 +22,8 @@
         android:layout_alignLeft="@+id/btnChangeProfile"
         android:layout_alignStart="@+id/btnChangeProfile"
         android:layout_alignRight="@+id/btnChangeProfile"
-        android:layout_alignEnd="@+id/btnChangeProfile" />
+        android:layout_alignEnd="@+id/btnChangeProfile"
+        android:enabled="false" />
 
     <Button
         android:layout_width="wrap_content"
@@ -54,4 +55,15 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textIsSelectable="false" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceMedium"
+        android:text="Medium Text"
+        android:id="@+id/tvProfileLogin"
+        android:layout_marginBottom="116dp"
+        android:layout_above="@+id/btnNewProfile"
+        android:layout_centerHorizontal="true"
+        android:visibility="invisible" />
 </RelativeLayout>
