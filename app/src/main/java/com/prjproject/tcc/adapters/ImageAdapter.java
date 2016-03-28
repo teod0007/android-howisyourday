@@ -13,15 +13,16 @@ import android.support.v7.widget.RecyclerView;
 import com.prjproject.tcc.R;
 import com.prjproject.tcc.model.Activity;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
  * Created by Emanuel on 2016-03-13.
  */
 public class ImageAdapter extends RecyclerView.Adapter{
-    private List<Object> items;
+    private ArrayList<Activity> items;
 
-    public ImageAdapter(List<Object> items) {
+    public ImageAdapter(ArrayList<Activity> items) {
         this.items = items;
     }
 
@@ -47,7 +48,7 @@ public class ImageAdapter extends RecyclerView.Adapter{
         return items == null ? 0 : items.size();//this.items.size();
     }
 
-    public void addItem(Object item) {
+    public void addItem(Activity item) {
         items.add(item);
     }
 

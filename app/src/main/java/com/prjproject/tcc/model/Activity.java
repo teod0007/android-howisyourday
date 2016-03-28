@@ -13,7 +13,7 @@ public class Activity {
     private String dayPeriod;
     private Bitmap activityImage;
 
-    public Activity(int _id, int category_id, int day_id, String name, String dayPeriod, Bitmap activityImage) {
+    public Activity(int _id, int category_id, String name, Bitmap activityImage) {
         this._id = _id;
         this.category_id = category_id;
         this.day_id = day_id;
@@ -22,7 +22,7 @@ public class Activity {
         this.activityImage = activityImage;
     }
 
-    public Activity(int category_id, int day_id, String name, String dayPeriod, Bitmap activityImage) {
+    public Activity(int category_id, String name, Bitmap activityImage) {
         this.category_id = category_id;
         this.day_id = day_id;
         this.name = name;

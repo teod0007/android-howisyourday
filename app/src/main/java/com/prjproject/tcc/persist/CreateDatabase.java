@@ -1,12 +1,20 @@
 package com.prjproject.tcc.persist;
 import android.content.Context;
+import android.content.res.Resources;
 import android.database.Cursor;
 import android.database.MatrixCursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.database.sqlite.SQLiteStatement;
+import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 
+import com.prjproject.tcc.R;
+
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 
 /**
@@ -33,25 +41,32 @@ public class CreateDatabase extends SQLiteOpenHelper {
         sql = "CREATE TABLE activity(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "category_id INTEGER," +
-                "day_id INTEGER," +
                 "name TEXT," +
-                "day_period TEXT," +
                 "activity_image BLOB," +
-                "FOREIGN KEY(category_id) REFERENCES category(_id) ON DELETE CASCADE," +
-                "FOREIGN KEY(day_id) REFERENCES day(_id) ON DELETE CASCADE" +
+                "FOREIGN KEY(category_id) REFERENCES category(_id) ON DELETE CASCADE" +
                 ")";
         db.execSQL(sql);
+
         sql = "CREATE TABLE category(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
                 "name TEXT UNIQUE" +
                 ")";
         db.execSQL(sql);
         sql = "CREATE TABLE day(" +
+            "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+            "profile_id INTEGER," +
+            "isFuture BOOLEAN," +
+            "day_date DATE DEFAULT CURRENT_DATE," +
+            "FOREIGN KEY(profile_id) REFERENCES profile(_id) ON DELETE CASCADE ON UPDATE CASCADE" +
+            ")";
+        db.execSQL(sql);
+        sql = "CREATE TABLE day_activity(" +
                 "_id INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                "profile_id INTEGER," +
-                "isFuture BOOLEAN," +
-                "day_date DATE DEFAULT CURRENT_DATE," +
-                "FOREIGN KEY(profile_id) REFERENCES profile(_id) ON DELETE CASCADE ON UPDATE CASCADE" +
+                "activity_id INTEGER," +
+                "day_id INTEGER," +
+                "day_period TEXT," +
+                "FOREIGN KEY(activity_id) REFERENCES activity(_id) ON DELETE CASCADE," +
+                "FOREIGN KEY(day_id) REFERENCES day(_id) ON DELETE CASCADE" +
                 ")";
         db.execSQL(sql);
 
@@ -63,6 +78,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS activity");
         db.execSQL("DROP TABLE IF EXISTS category");
         db.execSQL("DROP TABLE IF EXISTS day");
+        db.execSQL("DROP TABLE IF EXISTS day_activity");
         onCreate(db);
     }
 

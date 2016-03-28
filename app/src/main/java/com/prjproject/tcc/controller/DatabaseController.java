@@ -5,6 +5,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 
 import com.prjproject.tcc.model.Activity;
 import com.prjproject.tcc.model.Category;
@@ -13,6 +14,8 @@ import com.prjproject.tcc.model.Profile;
 import com.prjproject.tcc.persist.CreateDatabase;
 
 import java.io.ByteArrayOutputStream;
+import java.sql.Blob;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
@@ -37,10 +40,8 @@ public class DatabaseController {
         db = database.getWritableDatabase();
         values = new ContentValues();
         values.put("category_id", a.getCategory_id());
-        values.put("day_id", a.getDay_id());
         values.put("name", a.getName());
-        values.put("day_period", a.getDayPeriod());
-        a.getActivityImage().compress(Bitmap.CompressFormat.PNG, 100, bos);
+        a.getActivityImage().compress(Bitmap.CompressFormat.JPEG, 100, bos);
         values.put("activity_image", bos.toByteArray());
         result = db.insert("activity", null, values);
         db.close();
@@ -86,16 +87,34 @@ public class DatabaseController {
         return result > 0;
     }
 
-    public Cursor readActivities(){
+    public ArrayList<Activity> readActivities(){
         Cursor cursor;
-        String[] fields = {"_id","category_id","day_id","name","day_period","activity_image"};
+        String[] fields = {"_id","category_id","name","activity_image"};
         db = database.getReadableDatabase();
         cursor = db.query("activity", fields, null, null, null, null, null, null);
         if(cursor != null){
             cursor.moveToFirst();
         }
         db.close();
-        return cursor;
+
+        ArrayList<Activity> listActivities = new ArrayList<>();
+
+        for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+            int id = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
+            int category_id = cursor.getInt(cursor.getColumnIndexOrThrow("category_id"));
+            String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+            byte[] image_bytes = cursor.getBlob(cursor.getColumnIndexOrThrow("activity_image"));
+            BitmapFactory.Options options=new BitmapFactory.Options();// Create object of bitmapfactory's option method for further option use
+            options.inPurgeable = true;
+            Bitmap image = BitmapFactory.decodeByteArray(image_bytes, 0, image_bytes.length,options);
+            Bitmap image2 = Bitmap.createScaledBitmap(image, 100, 100, true);
+            listActivities.add(new Activity(id,category_id,name,image2));
+            // The Cursor is now set to the right position
+            //listActivities.add(mCursor.getWhateverTypeYouWant(WHATEVER_COLUMN_INDEX_YOU_WANT));
+        }
+
+
+        return listActivities;
     }
 
     public Cursor readActivitiesPerDayId(String day_id){
@@ -164,6 +183,7 @@ public class DatabaseController {
         db.close();
         return cursor;
     }
+
 
 
     /*
