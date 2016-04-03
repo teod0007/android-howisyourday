@@ -6,8 +6,10 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     android:background="@drawable/background_1"
-    tools:context=".activities.ChangeProfileActivity">
+    tools:context="com.prjproject.tcc.activities.DistributeActivitiesActivity">
 
-    <include layout="@layout/content_change_profile" />
+
+    <include layout="@layout/content_distribute_activities" />
+
 
 </android.support.design.widget.CoordinatorLayout>

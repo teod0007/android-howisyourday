@@ -18,4 +18,5 @@
     <string name="profile_name_size_invalid">Nome pequeno! (Menor que 3 letras)</string>
     <string name="profile_create_ok">Perfil criado!</string>
     <string name="profile_create_error">Um erro ocorreu, tente novamente.</string>
+    <string name="title_activity_distribute_activities">DistributeActivitiesActivity</string>
 </resources>

@@ -24,6 +24,11 @@ import com.prjproject.tcc.controller.DatabaseController;
 import com.prjproject.tcc.listeners.RecyclerItemClickListener;
 import com.prjproject.tcc.model.Activity;
 
+import java.lang.reflect.Array;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Objects;
+
 public class ChooseActivitiesActivity extends AppCompatActivity implements View.OnClickListener{
     private Resources resources;
     private DatabaseController dbController;
@@ -43,8 +48,8 @@ public class ChooseActivitiesActivity extends AppCompatActivity implements View.
         Bitmap bitmap =  ((BitmapDrawable)drawable).getBitmap();
         dbController.insertActivity(new Activity(1, "Macarrão 1", bitmap ));
         dbController.insertActivity(new Activity(1, "Macarrão 2", bitmap ));
-        dbController.insertActivity(new Activity(1, "Macarrão 3", bitmap ));
-        */
+        dbController.insertActivity(new Activity(1, "Macarrão 3", bitmap ));*/
+
     }
 
     private void setRecycleViewListeners() {
@@ -84,7 +89,16 @@ public class ChooseActivitiesActivity extends AppCompatActivity implements View.
     }
 
     private void btnNextClick() {
-        Intent intent = new Intent(getApplicationContext(), ChooseActivitiesActivity.class);
+        GridView gridViewActivities = (GridView)findViewById(R.id.gridViewActivities);
+        List<Object> activities =  ((GridAdapter)gridViewActivities.getAdapter()).getItems();
+        int index = 0;
+        int[] idList = new int[activities.size()];
+        for(Object a : activities){
+            idList[index++] = ((Activity)a).get_id();
+        }
+
+        Intent intent = new Intent(getApplicationContext(), DistributeActivitiesActivity.class);
+        intent.putExtra("idList",idList);
         startActivity(intent);
     }
 

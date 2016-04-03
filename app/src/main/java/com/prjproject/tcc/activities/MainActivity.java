@@ -1,6 +1,7 @@
 package com.prjproject.tcc.activities;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -18,6 +19,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/AGENTORANGE.TTF");
+        TextView txtTitle = (TextView) findViewById(R.id.txtTitle);
+        txtTitle.setTypeface(font);
 
         setupButtons();
 

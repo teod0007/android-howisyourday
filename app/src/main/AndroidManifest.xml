@@ -59,8 +59,19 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.prjproject.tcc.activities.BeginRoutineActivity" />
         </activity>
-        <activity android:name=".utils.AndroidDatabaseManager"
-            android:theme="@style/Theme.AppCompat.Light"/>
+        <activity
+            android:name=".utils.AndroidDatabaseManager"
+            android:theme="@style/Theme.AppCompat.Light" />
+        <activity
+            android:name=".activities.DistributeActivitiesActivity"
+            android:label="@string/title_activity_distribute_activities"
+            android:parentActivityName=".activities.ChooseActivitiesActivity"
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="UnusedAttribute">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.prjproject.tcc.activities.ChooseActivitiesActivity" />
+        </activity>
     </application>
 
 </manifest>

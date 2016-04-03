@@ -12,6 +12,7 @@ import com.prjproject.tcc.model.Activity;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 /**
  * Created by Emanuel on 2016-03-26.
@@ -47,6 +48,10 @@ public class GridAdapter extends BaseAdapter {
     @Override
     public long getItemId(int position) {
         return position;
+    }
+
+    public List<Object> getItems() {
+        return items;
     }
 
     public void addItem(Object item) {
