@@ -50,11 +50,12 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/app_title"
         android:id="@+id/txtTitle"
-        android:layout_marginTop="243dp"
         android:textSize="112sp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textIsSelectable="false" />
+        android:textIsSelectable="false"
+        android:textColor="@color/titlecolor"
+        android:gravity="center"/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -65,5 +66,6 @@
         android:layout_marginBottom="116dp"
         android:layout_above="@+id/btnNewProfile"
         android:layout_centerHorizontal="true"
-        android:visibility="invisible" />
+        android:visibility="invisible"
+        android:textColor="@color/titlecolor"/>
 </RelativeLayout>
