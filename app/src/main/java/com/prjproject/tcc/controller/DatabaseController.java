@@ -95,10 +95,9 @@ public class DatabaseController {
         if(cursor != null){
             cursor.moveToFirst();
         }
-        db.close();
 
         ArrayList<Activity> listActivities = new ArrayList<>();
-
+        try{
         for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
             int id = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
             int category_id = cursor.getInt(cursor.getColumnIndexOrThrow("category_id"));
@@ -112,7 +111,46 @@ public class DatabaseController {
             // The Cursor is now set to the right position
             //listActivities.add(mCursor.getWhateverTypeYouWant(WHATEVER_COLUMN_INDEX_YOU_WANT));
         }
+            cursor.close();
 
+            db.close();
+        }catch(Exception e){e.printStackTrace();}
+
+        return listActivities;
+    }
+
+    public ArrayList<Activity> readActivitiesPerCategory(int category){
+        Cursor cursor;
+        String[] fields = {"_id","category_id","name","activity_image"};
+        db = database.getReadableDatabase();
+        cursor = db.rawQuery(
+                "SELECT * FROM activity WHERE category_id=?",
+                new String[]{""+category}
+        );
+
+        ArrayList<Activity> listActivities = new ArrayList<>();
+        try{
+            for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
+                int id = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
+                int category_id = cursor.getInt(cursor.getColumnIndexOrThrow("category_id"));
+                String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
+                byte[] image_bytes = cursor.getBlob(cursor.getColumnIndexOrThrow("activity_image"));
+                BitmapFactory.Options options=new BitmapFactory.Options();// Create object of bitmapfactory's option method for further option use
+                options.inPurgeable = true;
+                Bitmap image = BitmapFactory.decodeByteArray(image_bytes, 0, image_bytes.length,options);
+                Bitmap image2 = Bitmap.createScaledBitmap(image, 100, 100, true);
+                listActivities.add(new Activity(id,category_id,name,image2));
+                // The Cursor is now set to the right position
+                //listActivities.add(mCursor.getWhateverTypeYouWant(WHATEVER_COLUMN_INDEX_YOU_WANT));
+            }
+
+            if(cursor != null){
+                cursor.moveToFirst();
+            }
+            cursor.close();
+
+            db.close();
+        }catch(Exception e){e.printStackTrace();}
 
         return listActivities;
     }

@@ -12,25 +12,28 @@
     tools:context="com.prjproject.tcc.activities.ChooseActivitiesActivity"
     tools:showIn="@layout/activity_choose_activities">
 
-    <ImageButton
+    <Button
         android:layout_width="match_parent"
         android:layout_height="70dp"
         android:id="@+id/btnNext"
-        android:background="@color/titlebackgroundcolor"
+        android:text="@string/button_next"
+        android:textSize="28sp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 
     <TextView
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/title_activity_choose_activities"
         android:id="@+id/txtTitleNewDay"
-        android:textSize="80sp"
+        android:textSize="40sp"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textColor="@color/titlecolor"
+        android:background="@color/gridcolor"
         android:gravity="center"
+        android:padding="5dp"
         android:layout_marginBottom="10dp"
         />
 
@@ -70,8 +73,6 @@
         android:id="@+id/gridViewActivities"
         android:layout_centerHorizontal="true"
         android:numColumns="4"
-        android:verticalSpacing="5dp"
-        android:horizontalSpacing="5dp"
         android:stretchMode="columnWidth"
         android:layout_below="@+id/listViewMisc"
         android:layout_above="@+id/btnNext"

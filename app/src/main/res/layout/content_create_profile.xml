@@ -17,6 +17,7 @@
         android:layout_height="wrap_content"
         android:text="@string/button_create"
         android:id="@+id/btnCreateProfile"
+        android:textSize="28sp"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="105dp" />
@@ -26,6 +27,8 @@
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:hint="@string/text_field_name"
+        android:textSize="30sp"
+        android:textColor="@android:color/white"
         android:ems="10"
         android:id="@+id/edtFieldName"
         android:layout_marginBottom="24dp"

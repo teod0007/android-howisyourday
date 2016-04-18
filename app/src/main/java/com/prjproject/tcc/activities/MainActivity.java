@@ -20,9 +20,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/AGENTORANGE.TTF");
-        TextView txtTitle = (TextView) findViewById(R.id.txtTitle);
-        txtTitle.setTypeface(font);
+        //Typeface font = Typeface.createFromAsset(getAssets(), "fonts/AGENTORANGE.TTF");
+        //TextView txtTitle = (TextView) findViewById(R.id.txtTitle);
+        //txtTitle.setTypeface(font);
 
         setupButtons();
 

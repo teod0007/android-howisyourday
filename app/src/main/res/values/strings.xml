@@ -2,7 +2,7 @@
     <string name="app_name">tcc</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_create_profile">CreateProfileActivity</string>
-    <string name="app_title">O que você fez hoje?</string>
+    <string name="app_title">Como foi meu dia?</string>
     <string name="button_create">Criar</string>
     <string name="button_new_profile">Criar novo perfil</string>
     <string name="button_begin_rotine">Iniciar rotina</string>
@@ -10,6 +10,7 @@
     <string name="button_new_day">Novo dia</string>
     <string name="button_past_days">Dias passados</string>
     <string name="button_future">Futuro</string>
+    <string name="button_next">Terminou?</string>
     <string name="text_field_name">Nome</string>
     <string name="title_activity_begin_routine">Começar rotina!</string>
     <string name="title_activity_change_profile">Escolha um perfil</string>
@@ -18,5 +19,5 @@
     <string name="profile_name_size_invalid">Nome pequeno! (Menor que 3 letras)</string>
     <string name="profile_create_ok">Perfil criado!</string>
     <string name="profile_create_error">Um erro ocorreu, tente novamente.</string>
-    <string name="title_activity_distribute_activities">DistributeActivitiesActivity</string>
+    <string name="title_activity_distribute_activities">Arraste para o periodo!</string>
 </resources>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -16,121 +16,186 @@
 
 
     <android.support.percent.PercentRelativeLayout
+        android:id="@+id/layout_undistributed"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.4">
+        android:layout_height="0dp"
+        app:layout_heightPercent="50%">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_heightPercent="10%"
+            app:layout_heightPercent="15%"
             app:layout_widthPercent="100%"
-            android:gravity="center"
+            android:textColor="@android:color/white"
             android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Large Text"
+            android:text="@string/title_activity_distribute_activities"
             android:id="@+id/txtTitleDistribute"
-            android:textSize="40sp"/>
+            android:background="@color/gridcolor"
+            android:gravity="center"
+            android:padding="5dp"
+            android:textSize="40sp"
+            android:layout_marginBottom="10dp"/>
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_heightPercent="16%"
+            app:layout_heightPercent="17%"
             app:layout_widthPercent="100%"
             android:layout_below="@id/txtTitleDistribute"
             android:id="@+id/listViewFoodDist"
             android:scrollbars="horizontal"
             android:layout_gravity="center"
+            android:background="@color/foodcolor"
+            android:layout_marginBottom="10dp"
             />
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_heightPercent="16%"
+            app:layout_heightPercent="17%"
             app:layout_widthPercent="100%"
             android:layout_below="@id/listViewFoodDist"
             android:id="@+id/listViewMedicineDist"
-            android:scrollbars="horizontal"/>
+            android:scrollbars="horizontal"
+            android:background="@color/medcolor"
+            android:layout_marginBottom="10dp"/>
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_heightPercent="16%"
+            app:layout_heightPercent="17%"
             app:layout_widthPercent="100%"
             android:layout_below="@id/listViewMedicineDist"
             android:id="@+id/listViewMiscDist"
-            android:scrollbars="horizontal"/>
+            android:scrollbars="horizontal"
+            android:background="@color/misccolor"
+            android:layout_marginBottom="10dp"/>
 
     </android.support.percent.PercentRelativeLayout>
 
     <android.support.percent.PercentRelativeLayout
+        android:layout_below="@id/layout_undistributed"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_weight="0.6">
+        android:layout_height="0dp"
+        app:layout_heightPercent="50%">
 
-        <LinearLayout
+    <android.support.percent.PercentRelativeLayout
             android:id="@+id/layout_morning"
             android:orientation="vertical"
+            android:layout_marginRight="5dp"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_heightPercent="50%"
-            app:layout_widthPercent="50%">
+            app:layout_widthPercent="49%">
             <ImageView
                 android:id="@+id/image_morning"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </LinearLayout>
-        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_widthPercent="100%"
+                app:layout_heightPercent="70%"/>
+
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_widthPercent="100%"
+                app:layout_heightPercent="30%"
+                android:layout_below="@+id/image_morning"
+                android:id="@+id/listViewMorning"
+                android:scrollbars="horizontal"
+                android:background="@color/misccolor"
+                android:layout_marginBottom="10dp"/>
+        </android.support.percent.PercentRelativeLayout>
+
+        <android.support.percent.PercentRelativeLayout
             android:id="@+id/layout_afternoon"
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_heightPercent="50%"
-            app:layout_widthPercent="50%"
+            app:layout_widthPercent="49%"
             android:layout_toRightOf="@id/layout_morning">
             <ImageView
                 android:id="@+id/image_afternoon"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </LinearLayout>
-        <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_widthPercent="100%"
+                app:layout_heightPercent="70%"/>
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_widthPercent="100%"
+                app:layout_heightPercent="30%"
+                android:layout_below="@+id/image_afternoon"
+                android:id="@+id/listViewAfternoon"
+                android:scrollbars="horizontal"
+                android:background="@color/misccolor"
+                android:layout_marginBottom="10dp"/>
+        </android.support.percent.PercentRelativeLayout>
+
+        <android.support.percent.PercentRelativeLayout
             android:id="@+id/layout_evening"
             android:orientation="vertical"
+            android:layout_marginRight="5dp"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_heightPercent="50%"
-            app:layout_widthPercent="50%"
+            app:layout_widthPercent="49%"
             android:layout_below="@id/layout_morning">
             <ImageView
                 android:id="@+id/image_evening"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </LinearLayout>
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_widthPercent="100%"
+                app:layout_heightPercent="70%"/>
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_widthPercent="100%"
+                app:layout_heightPercent="30%"
+                android:layout_below="@+id/image_evening"
+                android:id="@+id/listViewEvening"
+                android:scrollbars="horizontal"
+                android:background="@color/misccolor"
+                android:layout_marginBottom="10dp"/>
+        </android.support.percent.PercentRelativeLayout>
 
-        <LinearLayout
+        <android.support.percent.PercentRelativeLayout
             android:id="@+id/layout_dawn"
             android:orientation="vertical"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_heightPercent="50%"
-            app:layout_widthPercent="50%"
+            app:layout_widthPercent="49%"
             android:layout_below="@id/layout_afternoon"
             android:layout_toRightOf="@id/layout_evening">
             <ImageView
                 android:id="@+id/image_dawn"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"/>
-        </LinearLayout>
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_widthPercent="100%"
+                app:layout_heightPercent="70%"/>
+            <android.support.v7.widget.RecyclerView
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layout_widthPercent="100%"
+                app:layout_heightPercent="30%"
+                android:layout_below="@+id/image_dawn"
+                android:id="@+id/listViewDawn"
+                android:scrollbars="horizontal"
+                android:background="@color/misccolor"
+                android:layout_marginBottom="10dp"/>
+        </android.support.percent.PercentRelativeLayout>
 
     </android.support.percent.PercentRelativeLayout>
 
-</LinearLayout>
+</android.support.percent.PercentRelativeLayout>
