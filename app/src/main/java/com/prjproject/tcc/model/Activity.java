@@ -13,6 +13,15 @@ public class Activity {
     private String dayPeriod;
     private Bitmap activityImage;
 
+    public Activity(int _id, int category_id, String name, Bitmap activityImage, String dayPeriod) {
+        this._id = _id;
+        this.category_id = category_id;
+        this.day_id = day_id;
+        this.name = name;
+        this.dayPeriod = dayPeriod;
+        this.activityImage = activityImage;
+    }
+
     public Activity(int _id, int category_id, String name, Bitmap activityImage) {
         this._id = _id;
         this.category_id = category_id;

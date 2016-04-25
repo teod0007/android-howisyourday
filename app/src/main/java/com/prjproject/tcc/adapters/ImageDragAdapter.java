@@ -14,6 +14,7 @@ import com.prjproject.tcc.R;
 import com.prjproject.tcc.model.Activity;
 
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by Emanuel on 2016-03-13.
@@ -68,6 +69,11 @@ public class ImageDragAdapter extends RecyclerView.Adapter{
 
     public Object getItem(int position) {
         return items == null ? null : items.get(position);
+    }
+
+    public ArrayList<Activity> getItems() {
+        return items == null ? null : items;
+
     }
 
     private class ViewHolderImage extends RecyclerView.ViewHolder {

@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.percent.PercentRelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".activities.ShowActivitiesActivity"
+    tools:showIn="@layout/activity_show_activities">
+
+    <android.support.percent.PercentRelativeLayout
+        android:id="@+id/layout_undistributed"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        app:layout_heightPercent="100%">
+
+
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="7.5%"
+            app:layout_widthPercent="100%"
+            android:textColor="@android:color/white"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/title_activity_show_activities"
+            android:id="@+id/txtTitleDistribute"
+            android:background="@color/gridcolor"
+            android:gravity="center"
+            android:padding="5dp"
+            android:textSize="40sp"
+            android:layout_marginBottom="10dp"/>
+
+        <ToggleButton
+            android:id="@+id/btnToggleMorning"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="7.5%"
+            app:layout_widthPercent="25%"
+            android:layout_below="@id/txtTitleDistribute"
+            />
+        <ToggleButton
+            android:id="@+id/btnToggleAfternoon"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="7.5%"
+            app:layout_widthPercent="25%"
+            android:layout_below="@id/txtTitleDistribute"
+            android:layout_toRightOf="@id/btnToggleMorning"
+            />
+        <ToggleButton
+            android:id="@+id/btnToggleEvening"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="7.5%"
+            app:layout_widthPercent="25%"
+            android:layout_below="@id/txtTitleDistribute"
+            android:layout_toRightOf="@id/btnToggleAfternoon"
+            />
+        <ToggleButton
+            android:id="@+id/btnToggleDawn"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="7.5%"
+            app:layout_widthPercent="25%"
+            android:layout_below="@id/txtTitleDistribute"
+            android:layout_toRightOf="@id/btnToggleEvening"
+            />
+
+        <ImageSwitcher
+            android:id="@+id/imageSwitcherDayPeriod"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="50%"
+            app:layout_widthPercent="100%"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:layout_below="@id/btnToggleMorning"
+            android:layout_marginTop="10dp">
+        </ImageSwitcher>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="25%"
+            app:layout_widthPercent="20%"
+            android:layout_below="@id/imageSwitcherDayPeriod"
+            android:id="@+id/listViewFoodShow"
+            android:scrollbars="horizontal"
+            android:background="@color/foodcolor"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="25%"
+            app:layout_widthPercent="20%"
+            android:layout_below="@id/imageSwitcherDayPeriod"
+            android:layout_toRightOf="@id/listViewFoodShow"
+            android:id="@+id/listViewMedicineShow"
+            android:scrollbars="horizontal"
+            android:background="@color/medcolor"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="25%"
+            app:layout_widthPercent="20%"
+            android:layout_below="@id/imageSwitcherDayPeriod"
+            android:layout_toRightOf="@id/listViewMedicineShow"
+            android:id="@+id/listViewDiversaoShow"
+            android:scrollbars="horizontal"
+            android:background="@color/misccolor"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="25%"
+            app:layout_widthPercent="20%"
+            android:layout_below="@id/imageSwitcherDayPeriod"
+            android:layout_toRightOf="@id/listViewDiversaoShow"
+            android:id="@+id/listViewStudyShow"
+            android:scrollbars="horizontal"
+            android:background="@color/misccolor"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="5dp"/>
+
+        <android.support.v7.widget.RecyclerView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="25%"
+            app:layout_widthPercent="20%"
+            android:layout_below="@id/imageSwitcherDayPeriod"
+            android:layout_toRightOf="@id/listViewStudyShow"
+            android:id="@+id/listViewSocialShow"
+            android:scrollbars="horizontal"
+            android:background="@color/misccolor"
+            android:layout_marginTop="10dp"/>
+
+        <Button
+            android:id="@+id/btnEditDay"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="10%"
+            app:layout_widthPercent="100%"
+            android:layout_below="@id/listViewFoodShow"
+            />
+
+
+    </android.support.percent.PercentRelativeLayout>
+
+
+</android.support.percent.PercentRelativeLayout>

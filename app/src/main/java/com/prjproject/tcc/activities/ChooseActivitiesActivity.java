@@ -36,6 +36,7 @@ public class ChooseActivitiesActivity extends AppCompatActivity implements View.
     private ArrayList<Activity> listFood;
     private ArrayList<Activity> listMedicine;
     private ArrayList<Activity> listMisc;
+    private String profile_id;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class ChooseActivitiesActivity extends AppCompatActivity implements View.
         dbController = new DatabaseController(getApplicationContext());
         try {
             getActivitiesFromDB();
+            getIdsFromIntent();
             setupButtons();
             setupRecycleViewLayouts();
             setViewAdapters();
@@ -135,17 +137,23 @@ public class ChooseActivitiesActivity extends AppCompatActivity implements View.
 
     }
 
-    private void getActivitiesFromDB() {
-        listFood = dbController.readActivitiesPerCategory(1);
-        listMedicine = dbController.readActivitiesPerCategory(2);
-        listMisc = dbController.readActivitiesPerCategory(3);
-    }
-
     private void manualInsert(int cat,int id, String name){
         Drawable drawable = resources.getDrawable(id);
         Bitmap bitmap =  ((BitmapDrawable)drawable).getBitmap();
         dbController.insertActivity(new Activity(cat, name , bitmap ));
 
+    }
+
+    private void getIdsFromIntent() {
+        Bundle extras = getIntent().getExtras();
+        profile_id = extras.getString("profile_id");
+
+    }
+
+    private void getActivitiesFromDB() {
+        listFood = dbController.readActivitiesPerCategory(1);
+        listMedicine = dbController.readActivitiesPerCategory(2);
+        listMisc = dbController.readActivitiesPerCategory(3);
     }
 
     private void setRecycleViewListeners() {
@@ -195,6 +203,7 @@ public class ChooseActivitiesActivity extends AppCompatActivity implements View.
 
         Intent intent = new Intent(getApplicationContext(), DistributeActivitiesActivity.class);
         intent.putExtra("idList",idList);
+        intent.putExtra("profile_id",profile_id);
         startActivity(intent);
     }
 

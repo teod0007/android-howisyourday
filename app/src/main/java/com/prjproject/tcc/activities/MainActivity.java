@@ -71,6 +71,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
     public void btnBeginRoutineClick(){
         Intent intent = new Intent(getApplicationContext(), BeginRoutineActivity.class);
+        intent.putExtra("profile_id",current_id);
         startActivity(intent);
     }
 

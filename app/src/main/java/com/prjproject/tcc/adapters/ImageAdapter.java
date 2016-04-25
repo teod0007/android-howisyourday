@@ -48,6 +48,15 @@ public class ImageAdapter extends RecyclerView.Adapter{
         return items == null ? 0 : items.size();//this.items.size();
     }
 
+    public void setItemsList(ArrayList<Activity> newItems){
+        if(this.items == null)
+            this.items = newItems;
+        else{
+            this.items.clear();
+            this.items.addAll(newItems);
+        }
+    }
+
     public void addItem(Activity item) {
         items.add(item);
     }

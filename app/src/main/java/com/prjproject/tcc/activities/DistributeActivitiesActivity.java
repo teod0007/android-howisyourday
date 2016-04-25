@@ -17,6 +17,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.DragEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 
@@ -27,8 +28,11 @@ import com.prjproject.tcc.adapters.ImageDragAdapter;
 import com.prjproject.tcc.controller.DatabaseController;
 import com.prjproject.tcc.listeners.RecyclerItemClickListener;
 import com.prjproject.tcc.model.Activity;
+import com.prjproject.tcc.model.Day;
 
 import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
 
 public class DistributeActivitiesActivity extends AppCompatActivity implements View.OnClickListener, View.OnDragListener{
     private Resources resources;
@@ -40,8 +44,18 @@ public class DistributeActivitiesActivity extends AppCompatActivity implements V
     private ArrayList<Activity> listAfternoon;
     private ArrayList<Activity> listEvening;
     private ArrayList<Activity> listDawn;
+    private String profile_id;
 
     private int[] arrayUndistributedIds;
+
+    RecyclerView listViewFood;
+    RecyclerView listViewMedicine;
+    RecyclerView listViewMisc;
+
+    RecyclerView listViewMorning;
+    RecyclerView listViewAfternoon;
+    RecyclerView listViewEvening;
+    RecyclerView listViewDawn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -56,6 +70,7 @@ public class DistributeActivitiesActivity extends AppCompatActivity implements V
         listEvening = new ArrayList<>();
         listDawn = new ArrayList<>();
         getIdsFromIntent();
+        setupViews();
         setupButtons();
         setupRecycleViewLayouts();
         setViewAdapters();
@@ -73,6 +88,18 @@ public class DistributeActivitiesActivity extends AppCompatActivity implements V
 
     }
 
+    private void setupViews() {
+        listViewFood = (RecyclerView) findViewById(R.id.listViewFoodDist);
+        listViewMedicine = (RecyclerView) findViewById(R.id.listViewMedicineDist);
+        listViewMisc = (RecyclerView) findViewById(R.id.listViewMiscDist);
+
+        listViewMorning = (RecyclerView) findViewById(R.id.listViewMorning);
+        listViewAfternoon = (RecyclerView) findViewById(R.id.listViewAfternoon);
+        listViewEvening = (RecyclerView) findViewById(R.id.listViewEvening);
+        listViewDawn = (RecyclerView) findViewById(R.id.listViewDawn);
+
+    }
+
     private void setDragListeners() {
         (findViewById(R.id.layout_morning)).setOnDragListener(this);
         (findViewById(R.id.layout_afternoon)).setOnDragListener(this);
@@ -83,6 +110,7 @@ public class DistributeActivitiesActivity extends AppCompatActivity implements V
     private void getIdsFromIntent() {
         Bundle extras = getIntent().getExtras();
         arrayUndistributedIds = extras.getIntArray("idList");
+        profile_id = extras.getString("profile_id");
 
         ArrayList<Activity> activities = dbController.readActivities();
 
@@ -110,14 +138,6 @@ public class DistributeActivitiesActivity extends AppCompatActivity implements V
     }
 
     private void setRecycleViewListeners() {
-        RecyclerView listViewFood = (RecyclerView) findViewById(R.id.listViewFoodDist);
-        RecyclerView listViewMedicine = (RecyclerView) findViewById(R.id.listViewMedicineDist);
-        RecyclerView listViewMisc = (RecyclerView) findViewById(R.id.listViewMiscDist);
-
-        RecyclerView listViewMorning = (RecyclerView) findViewById(R.id.listViewMorning);
-        RecyclerView listViewAfternoon = (RecyclerView) findViewById(R.id.listViewAfternoon);
-        RecyclerView listViewEvening = (RecyclerView) findViewById(R.id.listViewEvening);
-        RecyclerView listViewDawn = (RecyclerView) findViewById(R.id.listViewDawn);
 
         ImageDragAdapter listFoodAdapter = (ImageDragAdapter)listViewFood.getAdapter();
         ImageDragAdapter listMedicineAdapter = (ImageDragAdapter)listViewMedicine.getAdapter();
@@ -171,40 +191,45 @@ public class DistributeActivitiesActivity extends AppCompatActivity implements V
     }
 
     private void setupButtons() {
-        /*ImageButton btnNext = (ImageButton) findViewById(R.id.btnNext);
+        Button btnSave = (Button) findViewById(R.id.btnSaveDay);
 
-        btnNext.setOnClickListener(this);*/
+        btnSave.setOnClickListener(this);
     }
 
     //Click handling
     @Override
     public void onClick(View v) {
-        /*
+
         switch (v.getId()) {
-            case R.id.btnNext:
-                btnNextClick();
+            case R.id.btnSaveDay:
+                btnSaveClick();
                 break;
-        }*/
+        }
     }
 
-    private void btnNextClick() {
-        Intent intent = new Intent(getApplicationContext(), ChooseActivitiesActivity.class);
-        startActivity(intent);
+    private void btnSaveClick() {
+
+        List<Activity> saveList = new ArrayList<>();
+        saveList.addAll(((ImageDragAdapter)listViewMorning.getAdapter()).getItems());
+        saveList.addAll(((ImageDragAdapter)listViewAfternoon.getAdapter()).getItems());
+        saveList.addAll(((ImageDragAdapter)listViewEvening.getAdapter()).getItems());
+        saveList.addAll(((ImageDragAdapter)listViewDawn.getAdapter()).getItems());
+
+        Day dayToSave = new Day(Integer.parseInt(profile_id), new Date(System.currentTimeMillis()),false);
+        dayToSave.setListActivities(saveList);
+
+        dbController.insertDay(dayToSave);
+
+        /*Intent intent = new Intent(getApplicationContext(), ChooseActivitiesActivity.class);
+        startActivity(intent);*/
     }
 
     private void setViewAdapters(){
-        RecyclerView listViewFood = (RecyclerView) findViewById(R.id.listViewFoodDist);
         listViewFood.setAdapter(new ImageDragAdapter(listFood));//dbController.readActivities()
-        RecyclerView listViewMedicine = (RecyclerView) findViewById(R.id.listViewMedicineDist);
         listViewMedicine.setAdapter(new ImageDragAdapter(listMedicine));
-        RecyclerView listViewMisc = (RecyclerView) findViewById(R.id.listViewMiscDist);
         listViewMisc.setAdapter(new ImageDragAdapter(listMisc));
 
 
-        RecyclerView listViewMorning = (RecyclerView) findViewById(R.id.listViewMorning);
-        RecyclerView listViewAfternoon = (RecyclerView) findViewById(R.id.listViewAfternoon);
-        RecyclerView listViewEvening = (RecyclerView) findViewById(R.id.listViewEvening);
-        RecyclerView listViewDawn = (RecyclerView) findViewById(R.id.listViewDawn);
         listViewMorning.setAdapter(new ImageDragAdapter(listMorning));
         listViewAfternoon.setAdapter(new ImageDragAdapter(listAfternoon));
         listViewEvening.setAdapter(new ImageDragAdapter(listEvening));
@@ -214,17 +239,10 @@ public class DistributeActivitiesActivity extends AppCompatActivity implements V
 
     private void setupRecycleViewLayouts(){
 
-        RecyclerView listViewFood = (RecyclerView) findViewById(R.id.listViewFoodDist);
         listViewFood.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        RecyclerView listViewMedicine = (RecyclerView) findViewById(R.id.listViewMedicineDist);
         listViewMedicine.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        RecyclerView listViewMisc = (RecyclerView) findViewById(R.id.listViewMiscDist);
         listViewMisc.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
 
-        RecyclerView listViewMorning = (RecyclerView) findViewById(R.id.listViewMorning);
-        RecyclerView listViewAfternoon = (RecyclerView) findViewById(R.id.listViewAfternoon);
-        RecyclerView listViewEvening = (RecyclerView) findViewById(R.id.listViewEvening);
-        RecyclerView listViewDawn = (RecyclerView) findViewById(R.id.listViewDawn);
         listViewMorning.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         listViewAfternoon.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         listViewEvening.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
@@ -249,15 +267,19 @@ public class DistributeActivitiesActivity extends AppCompatActivity implements V
             int vId = v.getId();
             switch(v.getId()){
                 case R.id.layout_morning:
+                    ((Activity) activity).setDayPeriod("morning");
                     to = (RecyclerView) findViewById(R.id.listViewMorning);
                     break;
                 case R.id.layout_afternoon:
+                    ((Activity) activity).setDayPeriod("afternoon");
                     to = (RecyclerView) findViewById(R.id.listViewAfternoon);
                     break;
                 case R.id.layout_evening:
+                    ((Activity) activity).setDayPeriod("evening");
                     to = (RecyclerView) findViewById(R.id.listViewEvening);
                     break;
                 case R.id.layout_dawn:
+                    ((Activity) activity).setDayPeriod("dawn");
                     to = (RecyclerView) findViewById(R.id.listViewDawn);
                     break;
             }

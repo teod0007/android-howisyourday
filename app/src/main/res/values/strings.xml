@@ -20,4 +20,7 @@
     <string name="profile_create_ok">Perfil criado!</string>
     <string name="profile_create_error">Um erro ocorreu, tente novamente.</string>
     <string name="title_activity_distribute_activities">Arraste para o periodo!</string>
+    <string name="title_activity_show_activities">Atividades realizadas</string>
+    <string name="button_save_day">Salvar dia</string>
+    <string name="title_activity_choose_day">Escolha o dia</string>
 </resources>

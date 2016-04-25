@@ -1,6 +1,9 @@
 package com.prjproject.tcc.model;
 
-import java.sql.Date;
+import java.util.Date;
+import java.util.List;
+
+import com.prjproject.tcc.model.Activity;
 
 /**
  * Created by Emanuel on 2016-03-20.
@@ -10,6 +13,7 @@ public class Day {
     private int profile_id;
     private Date day_date;
     private boolean isFuture;
+    private List<Activity> listActivities;
 
     public Day(int profile_id, Date day_date, boolean isFuture) {
         this.profile_id = profile_id;
@@ -23,6 +27,7 @@ public class Day {
         this.day_date = day_date;
         this.isFuture = isFuture;
     }
+
 
     public int get_id() {
         return _id;
@@ -54,5 +59,13 @@ public class Day {
 
     public void setIsFuture(boolean isFuture) {
         this.isFuture = isFuture;
+    }
+
+    public List<Activity> getListActivities() {
+        return listActivities;
+    }
+
+    public void setListActivities(List<Activity> listActivities) {
+        this.listActivities = listActivities;
     }
 }

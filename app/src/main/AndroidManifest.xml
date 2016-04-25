@@ -72,6 +72,17 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.prjproject.tcc.activities.ChooseActivitiesActivity" />
         </activity>
+        <activity
+            android:name=".activities.ShowActivitiesActivity"
+            android:label="@string/title_activity_show_activities"
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="UnusedAttribute"/>
+
+        <activity android:name=".activities.ChooseDayActivity"
+            android:label="@string/title_activity_choose_day"
+            android:theme="@style/AppTheme.NoActionBar"
+            tools:ignore="UnusedAttribute"/>
+
     </application>
 
 </manifest>
