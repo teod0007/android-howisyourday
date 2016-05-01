@@ -32,7 +32,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textColor="@color/titlecolor"
-        android:background="@color/gridcolor"
+        android:background="@drawable/border_shadow"
         android:gravity="center"
         android:padding="5dp"
         android:layout_marginBottom="10dp"
@@ -80,7 +80,7 @@
         android:textSize="20sp"
         android:layout_below="@+id/txtTitleNewDay"
         android:layout_toRightOf="@+id/txtCategoryMedicine"
-        android:background="@color/misccolor"
+        android:background="@color/socialcolor"
         android:gravity="center"
         android:padding="5dp"
         android:layout_marginRight="5dp"
@@ -96,7 +96,7 @@
         android:textSize="20sp"
         android:layout_below="@+id/txtTitleNewDay"
         android:layout_toRightOf="@+id/txtCategorySocial"
-        android:background="@color/misccolor"
+        android:background="@color/funcolor"
         android:gravity="center"
         android:padding="5dp"
         android:layout_marginRight="5dp"
@@ -112,7 +112,7 @@
         android:textSize="20sp"
         android:layout_below="@+id/txtTitleNewDay"
         android:layout_toRightOf="@+id/txtCategoryFun"
-        android:background="@color/misccolor"
+        android:background="@color/studycolor"
         android:gravity="center"
         android:padding="5dp"
         />
@@ -153,7 +153,7 @@
         android:scrollbars="vertical"
         android:layout_marginBottom="10dp"
         android:layout_marginRight="5dp"
-        android:background="@color/misccolor"/>
+        android:background="@color/socialcolor"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="0dp"
@@ -166,7 +166,7 @@
         android:scrollbars="vertical"
         android:layout_marginBottom="10dp"
         android:layout_marginRight="5dp"
-        android:background="@color/misccolor"/>
+        android:background="@color/funcolor"/>
 
     <android.support.v7.widget.RecyclerView
         android:layout_width="0dp"
@@ -178,7 +178,7 @@
         android:layout_toRightOf="@+id/listViewFun"
         android:scrollbars="vertical"
         android:layout_marginBottom="10dp"
-        android:background="@color/misccolor"/>
+        android:background="@color/studycolor"/>
 
     <GridView
         android:layout_width="match_parent"
@@ -191,7 +191,7 @@
         android:layout_below="@+id/listViewFood"
         android:layout_above="@+id/btnNext"
         android:layout_marginBottom="10dp"
-        android:background="@color/gridcolor"/>
+        android:background="@drawable/border_shadow"/>
 
 
 </android.support.percent.PercentRelativeLayout>

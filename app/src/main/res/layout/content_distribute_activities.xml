@@ -31,7 +31,7 @@
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="@string/title_activity_distribute_activities"
             android:id="@+id/txtTitleDistribute"
-            android:background="@color/gridcolor"
+            android:background="@drawable/border_shadow"
             android:gravity="center"
             android:padding="5dp"
             android:textSize="40sp"
@@ -79,7 +79,7 @@
             android:textSize="20sp"
             android:layout_below="@+id/txtTitleDistribute"
             android:layout_toRightOf="@+id/txtCategoryMedicine"
-            android:background="@color/misccolor"
+            android:background="@color/socialcolor"
             android:gravity="center"
             android:padding="5dp"
             android:layout_marginRight="5dp"
@@ -95,7 +95,7 @@
             android:textSize="20sp"
             android:layout_below="@+id/txtTitleDistribute"
             android:layout_toRightOf="@+id/txtCategorySocial"
-            android:background="@color/misccolor"
+            android:background="@color/funcolor"
             android:gravity="center"
             android:padding="5dp"
             android:layout_marginRight="5dp"
@@ -111,7 +111,7 @@
             android:textSize="20sp"
             android:layout_below="@+id/txtTitleDistribute"
             android:layout_toRightOf="@+id/txtCategoryFun"
-            android:background="@color/misccolor"
+            android:background="@color/studycolor"
             android:gravity="center"
             android:padding="5dp"
             />
@@ -152,7 +152,7 @@
             android:layout_toRightOf="@+id/listViewMedicineDist"
             android:id="@+id/listViewSocialDist"
             android:scrollbars="vertical"
-            android:background="@color/misccolor"
+            android:background="@color/socialcolor"
             android:layout_marginBottom="10dp"
             android:layout_marginRight="5dp"/>
 
@@ -165,7 +165,7 @@
             android:layout_toRightOf="@+id/listViewSocialDist"
             android:id="@+id/listViewFunDist"
             android:scrollbars="vertical"
-            android:background="@color/misccolor"
+            android:background="@color/funcolor"
             android:layout_marginBottom="10dp"
             android:layout_marginRight="5dp"/>
 
@@ -178,7 +178,7 @@
             android:layout_toRightOf="@+id/listViewFunDist"
             android:id="@+id/listViewStudyDist"
             android:scrollbars="vertical"
-            android:background="@color/misccolor"
+            android:background="@color/studycolor"
             android:layout_marginBottom="10dp"/>
 
     </android.support.percent.PercentRelativeLayout>
@@ -216,7 +216,7 @@
                 android:layout_below="@+id/image_morning"
                 android:id="@+id/listViewMorning"
                 android:scrollbars="horizontal"
-                android:background="@color/misccolor"
+                android:background="@color/neutralcolor"
                 android:layout_marginBottom="10dp"/>
         </android.support.percent.PercentRelativeLayout>
 
@@ -244,7 +244,7 @@
                 android:layout_below="@+id/image_afternoon"
                 android:id="@+id/listViewAfternoon"
                 android:scrollbars="horizontal"
-                android:background="@color/misccolor"
+                android:background="@color/neutralcolor"
                 android:layout_marginBottom="10dp"/>
         </android.support.percent.PercentRelativeLayout>
 
@@ -273,7 +273,7 @@
                 android:layout_below="@+id/image_evening"
                 android:id="@+id/listViewEvening"
                 android:scrollbars="horizontal"
-                android:background="@color/misccolor"
+                android:background="@color/neutralcolor"
                 android:layout_marginBottom="10dp"/>
         </android.support.percent.PercentRelativeLayout>
 
@@ -302,7 +302,7 @@
                 android:layout_below="@+id/image_dawn"
                 android:id="@+id/listViewDawn"
                 android:scrollbars="horizontal"
-                android:background="@color/misccolor"
+                android:background="@color/neutralcolor"
                 android:layout_marginBottom="10dp"/>
         </android.support.percent.PercentRelativeLayout>
 

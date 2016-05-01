@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
-    android:background="@color/titlebackgroundcolor"
+    android:background="@color/colorPrimary"
     tools:context=".activities.ChangeProfileActivity">
 
     <include layout="@layout/content_change_profile" />

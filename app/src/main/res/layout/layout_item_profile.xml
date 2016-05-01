@@ -9,7 +9,7 @@
         android:layout_height="match_parent"
         android:text="Profile Name"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:background="@color/gridcolor"
+        android:background="@color/colorPrimary"
         android:gravity="center"
         android:textSize="30sp"
         android:textColor="@android:color/white" />

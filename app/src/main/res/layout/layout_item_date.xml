@@ -9,7 +9,7 @@
         android:textColor="@android:color/white"
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:id="@+id/txtDateItem"
-        android:background="@color/gridcolor"
+        android:background="@color/colorPrimary"
         android:gravity="center"
         android:textSize="30sp"/>
 

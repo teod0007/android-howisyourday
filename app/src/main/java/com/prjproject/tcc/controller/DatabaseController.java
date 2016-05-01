@@ -15,7 +15,9 @@ import com.prjproject.tcc.persist.CreateDatabase;
 
 import java.io.ByteArrayOutputStream;
 import java.sql.Blob;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
@@ -52,6 +54,19 @@ public class DatabaseController {
     public int insertDay(Day d) {
         ContentValues values;
 
+
+        if(d.get_id() == -1 && d.getDay_date() != null) {
+            SimpleDateFormat sdf = new SimpleDateFormat("dd.MM.yyyy");
+            String shortDate = sdf.format(d.getDay_date());
+            try {
+                d.setDay_date(sdf.parse(shortDate));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+            d.set_id(getDayId(d.getDay_date().getTime(), ""+d.getProfile_id()));
+
+        }
+
         if(d.get_id() == -1) {
             db = database.getWritableDatabase();
             values = new ContentValues();
@@ -84,7 +99,7 @@ public class DatabaseController {
 
 
             db = database.getWritableDatabase();
-                db.delete("day_activity", "day_id = " + d.get_id(), null);
+            db.delete("day_activity", "day_id = " + d.get_id(), null);
 
             for(Activity a : d.getListActivities()){
                 values.clear();

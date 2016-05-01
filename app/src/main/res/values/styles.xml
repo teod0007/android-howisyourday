@@ -22,7 +22,10 @@
     <color name="titlecolor">#ecf0f1</color>
     <color name="foodcolor">#f1c40f</color>
     <color name="medcolor">#2ecc71</color>
-    <color name="misccolor">#95a5a6</color>
+    <color name="socialcolor">#B4EEB4</color>
+    <color name="funcolor">#dca1bf</color>
+    <color name="studycolor">#00ffff</color>
+    <color name="neutralcolor">#95a5a6</color>
     <color name="gridcolor">#34495e</color>
 
 </resources>

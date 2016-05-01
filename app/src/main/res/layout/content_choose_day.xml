@@ -23,7 +23,7 @@
         android:textSize="80sp"
         android:textIsSelectable="false"
         android:textColor="@color/titlecolor"
-        android:background="@color/gridcolor"
+        android:background="@drawable/border_shadow"
         android:padding="5dp"
         android:layout_marginBottom="10dp"
         android:gravity="center"
@@ -34,7 +34,7 @@
         android:layout_height="wrap_content"
         android:id="@+id/lstDays"
         android:layout_below="@+id/txtChooseDay"
-        android:background="@color/gridcolor"
+        android:background="@drawable/border_shadow"
         android:padding="5dp"
         android:layout_centerHorizontal="true"
         android:layout_alignParentBottom="true" />

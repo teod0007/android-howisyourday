@@ -56,7 +56,7 @@
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textColor="@color/titlecolor"
-        android:background="@color/gridcolor"
+        android:background="@drawable/border_shadow"
         android:padding="5dp"
         android:gravity="center"
         />

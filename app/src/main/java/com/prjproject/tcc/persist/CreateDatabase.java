@@ -28,7 +28,7 @@ import java.util.ArrayList;
 public class CreateDatabase extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "tcc.db";
-    private static final int VERSION = 12;
+    private static final int VERSION = 13;
     private Resources resources;
 
 
