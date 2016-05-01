@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.prjproject.tcc.R;
 
@@ -67,13 +68,40 @@ public class BeginRoutineActivity extends AppCompatActivity implements View.OnCl
         Intent intent = new Intent(getApplicationContext(), ShowActivitiesActivity.class);
         intent.putExtra("profile_id",profile_id);
         intent.putExtra("isFuture", true);
-        startActivity(intent);
+        startActivityForResult(intent,2);
     }
 
     private void btnNewDayClick(){
         Intent intent = new Intent(getApplicationContext(), ChooseActivitiesActivity.class);
         intent.putExtra("profile_id",profile_id);
-        startActivity(intent);
+        startActivityForResult(intent, 1);
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK){
+                String day_id = data.getStringExtra("day_id");
+
+                Intent intent = new Intent(getApplicationContext(), ShowActivitiesActivity.class);
+                intent.putExtra("profile_id",profile_id);
+                intent.putExtra("day_id", day_id);
+                intent.putExtra("isFuture", false);
+                startActivityForResult(intent,2);
+
+            }
+        }
+        if (requestCode == 2) {
+            if(resultCode == RESULT_OK){
+                String day_id = data.getStringExtra("day_id");
+
+                Intent intent = new Intent(getApplicationContext(), ChooseActivitiesActivity.class);
+                intent.putExtra("profile_id",profile_id);
+                intent.putExtra("day_id", day_id);
+                startActivityForResult(intent,1);
+
+            }
+        }
     }
 
 }

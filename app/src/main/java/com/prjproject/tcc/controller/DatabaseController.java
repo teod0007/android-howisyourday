@@ -49,34 +49,57 @@ public class DatabaseController {
         return result > 0;
     }
 
-    public boolean insertDay(Day d) {
+    public int insertDay(Day d) {
         ContentValues values;
 
-        db = database.getWritableDatabase();
-        values = new ContentValues();
-        values.put("profile_id", d.getProfile_id());
-        values.put("isFuture", d.isFuture());
-        values.put("day_date", d.getDay_date().getTime());
-        db.insert("day", null, values);
+        if(d.get_id() == -1) {
+            db = database.getWritableDatabase();
+            values = new ContentValues();
+            values.put("profile_id", d.getProfile_id());
+            values.put("isFuture", d.isFuture());
+            values.put("day_date", d.getDay_date() == null ? -1 : d.getDay_date().getTime());
+            db.insert("day", null, values);
 
-        db.close();
+            db.close();
 
-        d.set_id(getDayId(d.getDay_date().getTime(), d.getProfile_id() + ""));
+            d.set_id(getDayId(d.getDay_date() == null ? -1 : d.getDay_date().getTime(), d.getProfile_id() + ""));
 
-        db = database.getWritableDatabase();
+            if(!d.isFuture()) {
+                db = database.getWritableDatabase();
 
-        for(Activity a : d.getListActivities()){
-            values.clear();
-            values.put("activity_id", a.get_id());
-            values.put("day_period", a.getDayPeriod());
-            values.put("day_id", d.get_id());
-            db.insert("day_activity", null, values);
+                for (Activity a : d.getListActivities()) {
+                    values.clear();
+                    values.put("activity_id", a.get_id());
+                    values.put("day_period", a.getDayPeriod());
+                    values.put("day_id", d.get_id());
+                    db.insert("day_activity", null, values);
+                }
+                db.close();
+            }
+
+            return d.get_id();
+        }
+        else{
+            values = new ContentValues();
+
+
+            db = database.getWritableDatabase();
+                db.delete("day_activity", "day_id = " + d.get_id(), null);
+
+            for(Activity a : d.getListActivities()){
+                values.clear();
+                values.put("activity_id", a.get_id());
+                values.put("day_period", a.getDayPeriod());
+                values.put("day_id", d.get_id());
+                db.insert("day_activity", null, values);
+            }
+            db.close();
+
+            return d.get_id();
         }
 
 
-        db.close();
 
-        return true;
     }
 
     public boolean insertCategory(Category c){
@@ -120,10 +143,13 @@ public class DatabaseController {
             int category_id = cursor.getInt(cursor.getColumnIndexOrThrow("category_id"));
             String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
             byte[] image_bytes = cursor.getBlob(cursor.getColumnIndexOrThrow("activity_image"));
+            /*
             BitmapFactory.Options options=new BitmapFactory.Options();// Create object of bitmapfactory's option method for further option use
             options.inPurgeable = true;
             Bitmap image = BitmapFactory.decodeByteArray(image_bytes, 0, image_bytes.length,options);
             Bitmap image2 = Bitmap.createScaledBitmap(image, 100, 100, true);
+            */
+            Bitmap image2 = decodeSampledBitmapFromByteArray(image_bytes, 80, 80);
             listActivities.add(new Activity(id,category_id,name,image2));
             // The Cursor is now set to the right position
             //listActivities.add(mCursor.getWhateverTypeYouWant(WHATEVER_COLUMN_INDEX_YOU_WANT));
@@ -134,6 +160,46 @@ public class DatabaseController {
         }catch(Exception e){e.printStackTrace();}
 
         return listActivities;
+    }
+
+    public static Bitmap decodeSampledBitmapFromByteArray(byte[] bytes,
+                                                         int reqWidth, int reqHeight) {
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        Bitmap m  = BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
+
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        options.inPurgeable = true;
+        return BitmapFactory.decodeByteArray(bytes, 0, bytes.length, options);
+    }
+
+    public static int calculateInSampleSize(
+            BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) > reqHeight
+                    && (halfWidth / inSampleSize) > reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
     }
 
     public ArrayList<Activity> readActivitiesPerCategory(int category){
@@ -152,10 +218,13 @@ public class DatabaseController {
                 int category_id = cursor.getInt(cursor.getColumnIndexOrThrow("category_id"));
                 String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
                 byte[] image_bytes = cursor.getBlob(cursor.getColumnIndexOrThrow("activity_image"));
+                /*
                 BitmapFactory.Options options=new BitmapFactory.Options();// Create object of bitmapfactory's option method for further option use
                 options.inPurgeable = true;
                 Bitmap image = BitmapFactory.decodeByteArray(image_bytes, 0, image_bytes.length,options);
                 Bitmap image2 = Bitmap.createScaledBitmap(image, 100, 100, true);
+                */
+                Bitmap image2 = decodeSampledBitmapFromByteArray(image_bytes, 80, 80);
                 listActivities.add(new Activity(id,category_id,name,image2));
                 // The Cursor is now set to the right position
                 //listActivities.add(mCursor.getWhateverTypeYouWant(WHATEVER_COLUMN_INDEX_YOU_WANT));
@@ -187,6 +256,21 @@ public class DatabaseController {
         return -1;
     }
 
+    public int getDayFuture(String profile_id){
+        Cursor cursor;
+        db = database.getReadableDatabase();
+        cursor = db.rawQuery(
+                "SELECT _id FROM day WHERE isFuture=? AND profile_id=?",
+                new String[]{"1" , profile_id}
+        );
+        if(cursor.moveToFirst()){
+            return cursor.getInt(cursor.getColumnIndex("_id"));
+        }
+        db.close();
+
+        return -1;
+    }
+
     public ArrayList<Activity> readActivitiesPerDayId(String day_id, String profile_id, boolean isFuture){
         Cursor cursor;
         db = database.getReadableDatabase();
@@ -207,7 +291,6 @@ public class DatabaseController {
                     values
             );
 
-
         ArrayList<Activity> listActivities = new ArrayList<>();
             for(cursor.moveToFirst(); !cursor.isAfterLast(); cursor.moveToNext()) {
                 int id = cursor.getInt(cursor.getColumnIndexOrThrow("_id"));
@@ -215,10 +298,13 @@ public class DatabaseController {
                 String name = cursor.getString(cursor.getColumnIndexOrThrow("name"));
                 byte[] image_bytes = cursor.getBlob(cursor.getColumnIndexOrThrow("activity_image"));
                 String day_period = cursor.getString(cursor.getColumnIndexOrThrow("day_period"));
+                /*
                 BitmapFactory.Options options=new BitmapFactory.Options();// Create object of bitmapfactory's option method for further option use
                 options.inPurgeable = true;
                 Bitmap image = BitmapFactory.decodeByteArray(image_bytes, 0, image_bytes.length,options);
                 Bitmap image2 = Bitmap.createScaledBitmap(image, 100, 100, true);
+                */
+                Bitmap image2 = decodeSampledBitmapFromByteArray(image_bytes, 80, 80);
                 listActivities.add(new Activity(id,category_id,name,image2,day_period));
                 // The Cursor is now set to the right position
                 //listActivities.add(mCursor.getWhateverTypeYouWant(WHATEVER_COLUMN_INDEX_YOU_WANT));
@@ -243,7 +329,7 @@ public class DatabaseController {
         String[] fields = {"_id","profile_id","day_date","isFuture"};
         db = database.getReadableDatabase();
         cursor = db.rawQuery(
-                "SELECT * FROM day WHERE profile_id=?",
+                "SELECT * FROM day WHERE profile_id=? AND isFuture = 0",
                 new String[] {profile_id}
         );
         if(cursor != null){

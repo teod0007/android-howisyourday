@@ -49,12 +49,12 @@ public class ImageAdapter extends RecyclerView.Adapter{
     }
 
     public void setItemsList(ArrayList<Activity> newItems){
-        if(this.items == null)
+        //if(this.items == null)
             this.items = newItems;
-        else{
-            this.items.clear();
-            this.items.addAll(newItems);
-        }
+        //else{
+         //   this.items.clear();
+         //   this.items.addAll(newItems);
+        //}
     }
 
     public void addItem(Activity item) {

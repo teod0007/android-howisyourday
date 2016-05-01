@@ -23,4 +23,10 @@
     <string name="title_activity_show_activities">Atividades realizadas</string>
     <string name="button_save_day">Salvar dia</string>
     <string name="title_activity_choose_day">Escolha o dia</string>
+    <string name="category_food">Comida</string>
+    <string name="category_medicine">Saúde / Higiene</string>
+    <string name="category_social">Social</string>
+    <string name="category_fun">Diversão</string>
+    <string name="category_study">Estudos</string>
+    <string name="button_edit_day">Editar dia</string>
 </resources>

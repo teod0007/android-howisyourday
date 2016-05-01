@@ -35,8 +35,20 @@ public class ChooseActivitiesActivity extends AppCompatActivity implements View.
     private DatabaseController dbController;
     private ArrayList<Activity> listFood;
     private ArrayList<Activity> listMedicine;
-    private ArrayList<Activity> listMisc;
+    private ArrayList<Activity> listSocial;
+    private ArrayList<Activity> listFun;
+    private ArrayList<Activity> listStudy;
     private String profile_id;
+    private String day_id;
+
+    RecyclerView listViewFood;
+    RecyclerView listViewMedicine;
+    RecyclerView listViewSocial;
+    RecyclerView listViewFun;
+    RecyclerView listViewStudy;
+    GridView gridViewActivities;
+
+    Button btnNext;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +56,7 @@ public class ChooseActivitiesActivity extends AppCompatActivity implements View.
         setContentView(R.layout.activity_choose_activities);
         dbController = new DatabaseController(getApplicationContext());
         try {
+            initViews();
             getActivitiesFromDB();
             getIdsFromIntent();
             setupButtons();
@@ -54,129 +67,54 @@ public class ChooseActivitiesActivity extends AppCompatActivity implements View.
         }catch(Exception ex){
 
         }
-        /*Drawable drawable = resources.getDrawable(R.drawable.image_fruta);
-        Bitmap bitmap =  ((BitmapDrawable)drawable).getBitmap();
-        dbController.insertActivity(new Activity(1, "Macarrão 1", bitmap ));*/
-        /*dbController.insertCategory(new Category("comida"));
-        dbController.insertCategory(new Category("social"));
-        dbController.insertCategory(new Category("med_hig"));
-        dbController.insertCategory(new Category("diversao"));
-        dbController.insertCategory(new Category("estudo"));
-
-
-        manualInsert(1, R.drawable.image_fruta, "fruta");
-        manualInsert(1,R.drawable.image_cha, "chá");
-        manualInsert(1,R.drawable.image_macarrao, "macarrão");
-        manualInsert(1,R.drawable.image_pao, "pão");
-        //manualInsert(1,R.drawable.image_guarana, "guaraná");
-        manualInsert(1,R.drawable.image_suco, "suco");
-        manualInsert(1,R.drawable.image_bolacha, "bolacha");
-        manualInsert(1,R.drawable.image_leite, "leite");
-        manualInsert(1,R.drawable.image_arroz, "arroz");
-        manualInsert(1,R.drawable.image_feijao, "feijão");
-        manualInsert(1,R.drawable.image_carne, "carne");
-        manualInsert(1,R.drawable.image_salada, "salada");
-        manualInsert(1,R.drawable.image_pizza, "pizza");
-        manualInsert(1,R.drawable.image_sorvete, "sorvete");
-
-        manualInsert(2,R.drawable.image_mae, "mãe");
-        manualInsert(2,R.drawable.image_pai, "pai");
-        manualInsert(2,R.drawable.image_irmao, "irmão");
-        manualInsert(2,R.drawable.image_tio, "tio");
-        manualInsert(2,R.drawable.image_avos, "avos");
-        manualInsert(2,R.drawable.image_amigo_adulto, "amigo adulto");
-        manualInsert(2,R.drawable.image_amigo_crianca, "amigo criança");
-
-        manualInsert(3,R.drawable.image_medico, "medico");
-        manualInsert(3,R.drawable.image_enfermeiro, "enfermeira");
-        manualInsert(3,R.drawable.image_medicacao, "medicação");
-        manualInsert(3,R.drawable.image_exame, "exame");
-        manualInsert(3,R.drawable.image_soro, "soro");
-        manualInsert(3,R.drawable.image_banho, "banho");
-        manualInsert(3,R.drawable.image_repouso, "repouso");
-        manualInsert(3,R.drawable.image_pegar_veia, "pegar veia");
-        manualInsert(3,R.drawable.image_escovar_dentes, "escovar os dentes");
-        manualInsert(3,R.drawable.image_pentear_cabelo, "pentear os cabelos");
-        manualInsert(3,R.drawable.image_vestir_roupa, "vestir roupa");
-        manualInsert(3,R.drawable.image_calcar_sapato, "calçar sapato");
-        manualInsert(3,R.drawable.image_raio_x, "raio x");
-        manualInsert(3,R.drawable.image_tomografia, "tomografia");
-        manualInsert(3,R.drawable.image_fisioterapia, "fisioterapia");
-        manualInsert(3,R.drawable.image_tirar_sangue, "tirar sangue");
-        manualInsert(3,R.drawable.image_sonda, "Sonda");
-
-        manualInsert(4,R.drawable.image_tablet, "tablet");
-        manualInsert(4,R.drawable.image_celular, "celular");
-        manualInsert(4,R.drawable.image_tv, "TV");
-        manualInsert(4,R.drawable.image_jogos, "jogos");
-        manualInsert(4,R.drawable.image_livros, "livros");
-        manualInsert(4,R.drawable.image_dormir, "dormir");
-        manualInsert(4,R.drawable.image_computador, "computador");
-        manualInsert(4,R.drawable.image_meu_jogo, "jogo");
-        manualInsert(4,R.drawable.image_bicicleta, "bicicleta");
-        manualInsert(4,R.drawable.image_futebol, "futebol");
-        manualInsert(4,R.drawable.image_patins, "patins");
-        manualInsert(4,R.drawable.image_surfar, "surfar");
-        //manualInsert(4,R.drawable.image_mae, "patins");
-        manualInsert(4,R.drawable.image_skate, "skate");
-        manualInsert(4,R.drawable.image_viajar, "viajar");
-        manualInsert(4,R.drawable.image_cinema, "cinema");
-        manualInsert(4,R.drawable.image_parque, "parque");
-        manualInsert(4,R.drawable.image_zoo, "zoológico");
-        manualInsert(4,R.drawable.image_shopping, "shopping");
-
-        manualInsert(5,R.drawable.image_portugues, "português");
-        manualInsert(5,R.drawable.image_matematica, "matemática");
-        manualInsert(5,R.drawable.image_ciencias, "ciências");
-        manualInsert(5,R.drawable.image_artes, "artes");
-        manualInsert(5,R.drawable.image_hist_geo, "história e geografia");
-        manualInsert(5,R.drawable.image_ativ_prof, "atividade com o(a) professor(a)");
-        manualInsert(5,R.drawable.image_ed_fis, "educação física");
-        manualInsert(5,R.drawable.image_linguas, "línguas");*/
 
 
     }
 
-    private void manualInsert(int cat,int id, String name){
-        Drawable drawable = resources.getDrawable(id);
-        Bitmap bitmap =  ((BitmapDrawable)drawable).getBitmap();
-        dbController.insertActivity(new Activity(cat, name , bitmap ));
+    private void initViews() {
+        listViewFood = (RecyclerView) findViewById(R.id.listViewFood);
+        listViewMedicine = (RecyclerView) findViewById(R.id.listViewMedicine);
+        listViewSocial = (RecyclerView) findViewById(R.id.listViewSocial);
+        listViewFun = (RecyclerView) findViewById(R.id.listViewFun);
+        listViewStudy = (RecyclerView) findViewById(R.id.listViewStudy);
+        gridViewActivities = (GridView)findViewById(R.id.gridViewActivities);
 
     }
 
     private void getIdsFromIntent() {
         Bundle extras = getIntent().getExtras();
         profile_id = extras.getString("profile_id");
+        day_id = extras.getString("day_id");
 
     }
 
     private void getActivitiesFromDB() {
         listFood = dbController.readActivitiesPerCategory(1);
-        listMedicine = dbController.readActivitiesPerCategory(2);
-        listMisc = dbController.readActivitiesPerCategory(3);
+        listSocial = dbController.readActivitiesPerCategory(2);
+        listMedicine = dbController.readActivitiesPerCategory(3);
+        listFun = dbController.readActivitiesPerCategory(4);
+        listStudy = dbController.readActivitiesPerCategory(5);
     }
 
     private void setRecycleViewListeners() {
-        RecyclerView listViewFood = (RecyclerView) findViewById(R.id.listViewFood);
-        RecyclerView listViewMedicine = (RecyclerView) findViewById(R.id.listViewMedicine);
-        RecyclerView listViewMisc = (RecyclerView) findViewById(R.id.listViewMisc);
         RecyclerItemClickListener commonListener = new RecyclerItemClickListener(getApplicationContext(), new RecyclerItemClickListener.OnItemClickListener() {
                     @Override
                     public void onItemClick(View view, int position) {
                         Object activity =  (((ImageAdapter) ((RecyclerView) view.getParent()).getAdapter()).getItem(position));
-                        GridView gridViewActivities = (GridView)findViewById(R.id.gridViewActivities);
                         ((GridAdapter)gridViewActivities.getAdapter()).addItem(activity);
                     }
         });
         listViewFood.addOnItemTouchListener(commonListener);
         listViewMedicine.addOnItemTouchListener(commonListener);
-        listViewMisc.addOnItemTouchListener(commonListener);
+        listViewSocial.addOnItemTouchListener(commonListener);
+        listViewFun.addOnItemTouchListener(commonListener);
+        listViewStudy.addOnItemTouchListener(commonListener);
 
 
     }
 
     private void setupButtons() {
-        Button btnNext = (Button) findViewById(R.id.btnNext);
+        btnNext = (Button) findViewById(R.id.btnNext);
 
         btnNext.setOnClickListener(this);
     }
@@ -193,7 +131,6 @@ public class ChooseActivitiesActivity extends AppCompatActivity implements View.
     }
 
     private void btnNextClick() {
-        GridView gridViewActivities = (GridView)findViewById(R.id.gridViewActivities);
         List<Object> activities =  ((GridAdapter)gridViewActivities.getAdapter()).getItems();
         int index = 0;
         int[] idList = new int[activities.size()];
@@ -204,30 +141,79 @@ public class ChooseActivitiesActivity extends AppCompatActivity implements View.
         Intent intent = new Intent(getApplicationContext(), DistributeActivitiesActivity.class);
         intent.putExtra("idList",idList);
         intent.putExtra("profile_id",profile_id);
-        startActivity(intent);
+        intent.putExtra("day_id",day_id);
+        startActivityForResult(intent, 1);
     }
 
     private void setViewAdapters(){
-        RecyclerView listViewFood = (RecyclerView) findViewById(R.id.listViewFood);//dbController.readActivities()
-        RecyclerView listViewMedicine = (RecyclerView) findViewById(R.id.listViewMedicine);
-        RecyclerView listViewMisc = (RecyclerView) findViewById(R.id.listViewMisc);
-        GridView gridViewActivities = (GridView) findViewById(R.id.gridViewActivities);
 
         listViewFood.setAdapter(new ImageAdapter(listFood));
         listViewMedicine.setAdapter(new ImageAdapter(listMedicine));
-        listViewMisc.setAdapter(new ImageAdapter(listMisc));
+        listViewSocial.setAdapter(new ImageAdapter(listSocial));
+        listViewFun.setAdapter(new ImageAdapter(listFun));
+        listViewStudy.setAdapter(new ImageAdapter(listStudy));
         gridViewActivities.setAdapter(new GridAdapter(getApplicationContext()));
 
     }
 
     private void setupRecycleViewLayouts(){
 
-        RecyclerView listViewFood = (RecyclerView) findViewById(R.id.listViewFood);
-        listViewFood.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        RecyclerView listViewMedicine = (RecyclerView) findViewById(R.id.listViewMedicine);
-        listViewMedicine.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        RecyclerView listViewMisc = (RecyclerView) findViewById(R.id.listViewMisc);
-        listViewMisc.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        listViewFood.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        listViewMedicine.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        listViewSocial.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        listViewFun.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        listViewStudy.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+        if (requestCode == 1) {
+            if(resultCode == RESULT_OK){
+                String day_id = data.getStringExtra("day_id");
+
+                Intent intent = new Intent();
+                intent.putExtra("day_id", day_id);
+                setResult(RESULT_OK, intent);
+                finish();
+
+            }
+        }
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        recycleActivityList(listFood);
+        recycleActivityList(listMedicine);
+        recycleActivityList(listSocial);
+        recycleActivityList(listFun);
+        recycleActivityList(listStudy);
+
+
+        listViewFood = null;
+        listViewMedicine = null;
+        listViewSocial = null;
+        listViewFun = null;
+        listViewStudy = null;
+        gridViewActivities = null;
+
+        listFood = null;
+        listMedicine = null;
+        listSocial = null;
+        listFun = null;
+        listStudy = null;
+
+        btnNext = null;
+
+    }
+
+    private void recycleActivityList(ArrayList<Activity> list) {
+        for(Activity a : list){
+            a.getActivityImage().recycle();
+            a.setActivityImage(null);
+        }
+        list.clear();
 
     }
 }

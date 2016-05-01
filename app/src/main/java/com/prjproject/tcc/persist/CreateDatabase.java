@@ -28,7 +28,7 @@ import java.util.ArrayList;
 public class CreateDatabase extends SQLiteOpenHelper {
 
     private static final String DATABASE_NAME = "tcc.db";
-    private static final int VERSION = 11;
+    private static final int VERSION = 12;
     private Resources resources;
 
 
@@ -192,7 +192,7 @@ public class CreateDatabase extends SQLiteOpenHelper {
         values = new ContentValues();
         values.put("category_id", a.getCategory_id());
         values.put("name", a.getName());
-        a.getActivityImage().compress(Bitmap.CompressFormat.JPEG, 100, bos);
+        a.getActivityImage().compress(Bitmap.CompressFormat.JPEG, 0, bos);
         values.put("activity_image", bos.toByteArray());
         result = db.insert("activity", null, values);
 

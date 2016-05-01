@@ -1,5 +1,7 @@
 package com.prjproject.tcc.activities;
 
+import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -18,8 +20,10 @@ import com.prjproject.tcc.R;
 import com.prjproject.tcc.adapters.ImageAdapter;
 import com.prjproject.tcc.controller.DatabaseController;
 import com.prjproject.tcc.model.Activity;
+import com.prjproject.tcc.model.Day;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 public class ShowActivitiesActivity extends AppCompatActivity implements View.OnClickListener{
 
@@ -31,14 +35,14 @@ public class ShowActivitiesActivity extends AppCompatActivity implements View.On
     private ArrayList<Activity> listAll;
     private ArrayList<Activity> listFood;
     private ArrayList<Activity> listMedicine;
-    private ArrayList<Activity> listDiversao;
+    private ArrayList<Activity> listFun;
     private ArrayList<Activity> listStudy;
     private ArrayList<Activity> listSocial;
 
     private ImageSwitcher sw;
     private RecyclerView listViewFood;
     private RecyclerView listViewMedicine;
-    private RecyclerView listViewDiversao;
+    private RecyclerView listViewFun;
     private RecyclerView listViewStudy;
     private RecyclerView listViewSocial;
 
@@ -71,7 +75,7 @@ public class ShowActivitiesActivity extends AppCompatActivity implements View.On
             public View makeView() {
                 ImageView myView = new ImageView(getApplicationContext());
                 myView.setScaleType(ImageView.ScaleType.FIT_CENTER);
-                myView.setLayoutParams(new ImageSwitcher.LayoutParams(ImageSwitcher.LayoutParams.WRAP_CONTENT,ImageSwitcher.LayoutParams.WRAP_CONTENT));
+                myView.setLayoutParams(new ImageSwitcher.LayoutParams(ImageSwitcher.LayoutParams.WRAP_CONTENT, ImageSwitcher.LayoutParams.WRAP_CONTENT));
                 return myView;
             }
         });
@@ -82,7 +86,7 @@ public class ShowActivitiesActivity extends AppCompatActivity implements View.On
 
         listViewFood = (RecyclerView) findViewById(R.id.listViewFoodShow);
         listViewMedicine = (RecyclerView) findViewById(R.id.listViewMedicineShow);
-        listViewDiversao = (RecyclerView) findViewById(R.id.listViewDiversaoShow);
+        listViewFun = (RecyclerView) findViewById(R.id.listViewFunShow);
         listViewStudy = (RecyclerView) findViewById(R.id.listViewStudyShow);
         listViewSocial = (RecyclerView) findViewById(R.id.listViewSocialShow);
 
@@ -90,7 +94,14 @@ public class ShowActivitiesActivity extends AppCompatActivity implements View.On
     }
 
     private void getActivitiesFromDB(boolean isFuture, String profile_id, String day_id) {
+        if(isFuture){
+            day_id = ""+dbController.getDayFuture(profile_id);
+            if(day_id.equals("-1")){
+                day_id = ""+dbController.insertDay(new Day(Integer.valueOf(profile_id), null, true));
+            }
+        }
         listAll = dbController.readActivitiesPerDayId(day_id, profile_id, isFuture);
+        this.day_id = day_id;
     }
 
     private void distributeActivitiesPerList() {
@@ -110,7 +121,7 @@ public class ShowActivitiesActivity extends AppCompatActivity implements View.On
                             listMedicine.add(a);
                             break;
                         case 4:
-                            listDiversao.add(a);
+                            listFun.add(a);
                             break;
                         case 5:
                             listStudy.add(a);
@@ -128,13 +139,13 @@ public class ShowActivitiesActivity extends AppCompatActivity implements View.On
 
         ImageAdapter foodAdapter = (ImageAdapter)listViewFood.getAdapter();
         ImageAdapter medicineAdapter = (ImageAdapter)listViewMedicine.getAdapter();
-        ImageAdapter diversaoAdapter = (ImageAdapter)listViewDiversao.getAdapter();
+        ImageAdapter diversaoAdapter = (ImageAdapter)listViewFun.getAdapter();
         ImageAdapter studyAdapter = (ImageAdapter)listViewStudy.getAdapter();
         ImageAdapter socialAdapter = (ImageAdapter)listViewSocial.getAdapter();
 
         foodAdapter.setItemsList(listFood);
         medicineAdapter.setItemsList(listMedicine);
-        diversaoAdapter.setItemsList(listDiversao);
+        diversaoAdapter.setItemsList(listFun);
         studyAdapter.setItemsList(listStudy);
         socialAdapter.setItemsList(listSocial);
 
@@ -152,8 +163,8 @@ public class ShowActivitiesActivity extends AppCompatActivity implements View.On
         else listFood.clear();
         if(listMedicine == null) listMedicine = new ArrayList<>();
         else listMedicine.clear();
-        if(listDiversao == null) listDiversao = new ArrayList<>();
-        else listDiversao.clear();
+        if(listFun == null) listFun = new ArrayList<>();
+        else listFun.clear();
         if(listStudy == null) listStudy = new ArrayList<>();
         else listStudy.clear();
         if(listSocial == null) listSocial = new ArrayList<>();
@@ -186,6 +197,7 @@ public class ShowActivitiesActivity extends AppCompatActivity implements View.On
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.btnEditDay:
+                btnEditClick();
                 break;
             case R.id.btnToggleMorning:
                 togglePeriod(true, false, false, false);
@@ -202,6 +214,14 @@ public class ShowActivitiesActivity extends AppCompatActivity implements View.On
         }
     }
 
+    private void btnEditClick() {
+        Intent intent = new Intent();
+        intent.putExtra("day_id", day_id);
+        intent.putExtra("isFuture", true);
+        setResult(RESULT_OK, intent);
+        finish();
+    }
+
     private void togglePeriod(boolean morning, boolean afternoon, boolean evening, boolean dawn) {
 
         tgbMorning.setChecked(morning);
@@ -210,13 +230,19 @@ public class ShowActivitiesActivity extends AppCompatActivity implements View.On
         tgbDawn.setChecked(dawn);
 
         int rId = 0;
-        if(morning) rId = R.drawable.arrow_right;
-        else if(afternoon) rId = R.drawable.arrow_right;
-        else if(evening) rId = R.drawable.arrow_right;
-        else if(dawn) rId = R.drawable.arrow_right;
+        if(morning) rId = R.drawable.manha;
+        else if(afternoon) rId = R.drawable.tarde;
+        else if(evening) rId = R.drawable.noite;
+        else if(dawn) rId = R.drawable.madrugada;
 
-        sw.setImageResource(rId);
+        try {
+            Drawable dw = getResources().getDrawable(rId);
+            sw.setImageDrawable(null);
+            sw.setImageDrawable(dw);
 
+        }catch(Exception e){
+            e.printStackTrace();
+        }
         if(morning) currentDay_period = "morning";
         if(afternoon) currentDay_period = "afternoon";
         if(evening) currentDay_period = "evening";
@@ -231,7 +257,7 @@ public class ShowActivitiesActivity extends AppCompatActivity implements View.On
 
         listViewFood.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         listViewMedicine.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
-        listViewDiversao.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        listViewFun.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         listViewStudy.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
         listViewSocial.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
@@ -242,10 +268,61 @@ public class ShowActivitiesActivity extends AppCompatActivity implements View.On
 
         listViewFood.setAdapter(new ImageAdapter(listFood));//dbController.readActivities()
         listViewMedicine.setAdapter(new ImageAdapter(listMedicine));
-        listViewDiversao.setAdapter(new ImageAdapter(listDiversao));
+        listViewFun.setAdapter(new ImageAdapter(listFun));
         listViewStudy.setAdapter(new ImageAdapter(listStudy));
         listViewSocial.setAdapter(new ImageAdapter(listSocial));
 
+
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        recycleActivityList(listFood);
+        recycleActivityList(listMedicine);
+        recycleActivityList(listSocial);
+        recycleActivityList(listFun);
+        recycleActivityList(listStudy);
+        recycleActivityList(listAll);
+
+
+        listViewFood = null;
+        listViewMedicine = null;
+        listViewSocial = null;
+        listViewFun = null;
+        listViewStudy = null;
+
+        listAll = null;
+        listFood = null;
+        listMedicine = null;
+        listSocial = null;
+        listFun = null;
+        listStudy = null;
+
+        dbController = null;
+
+        btnEdit = null;
+        tgbMorning = null;
+        tgbAfternoon = null;
+        tgbEvening= null;
+        tgbDawn= null;
+
+        sw.clearAnimation();
+        sw = null;
+
+        finish();
+
+
+    }
+
+    private void recycleActivityList(ArrayList<Activity> list) {
+        for(Activity a : list){
+            if(a.getActivityImage()!=null) {
+                a.getActivityImage().recycle();
+                a.setActivityImage(null);
+            }
+        }
+        list.clear();
 
     }
 }

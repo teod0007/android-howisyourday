@@ -16,6 +16,7 @@ public class Day {
     private List<Activity> listActivities;
 
     public Day(int profile_id, Date day_date, boolean isFuture) {
+        this._id = -1;
         this.profile_id = profile_id;
         this.day_date = day_date;
         this.isFuture = isFuture;

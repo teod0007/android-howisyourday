@@ -6,6 +6,8 @@ import android.content.ClipDescription;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,6 +22,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.ImageView;
 
 import com.prjproject.tcc.R;
 import com.prjproject.tcc.adapters.GridAdapter;
@@ -39,23 +42,34 @@ public class DistributeActivitiesActivity extends AppCompatActivity implements V
     private DatabaseController dbController;
     private ArrayList<Activity> listFood;
     private ArrayList<Activity> listMedicine;
-    private ArrayList<Activity> listMisc;
+    private ArrayList<Activity> listSocial;
+    private ArrayList<Activity> listFun;
+    private ArrayList<Activity> listStudy;
+
     private ArrayList<Activity> listMorning;
     private ArrayList<Activity> listAfternoon;
     private ArrayList<Activity> listEvening;
     private ArrayList<Activity> listDawn;
     private String profile_id;
+    private String day_id;
 
     private int[] arrayUndistributedIds;
 
     RecyclerView listViewFood;
     RecyclerView listViewMedicine;
-    RecyclerView listViewMisc;
+    RecyclerView listViewSocial;
+    RecyclerView listViewFun;
+    RecyclerView listViewStudy;
 
     RecyclerView listViewMorning;
     RecyclerView listViewAfternoon;
     RecyclerView listViewEvening;
     RecyclerView listViewDawn;
+
+    ImageView imageViewMorning;
+    ImageView imageViewAfternoon;
+    ImageView imageViewEvening;
+    ImageView imageViewDawn;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -64,13 +78,17 @@ public class DistributeActivitiesActivity extends AppCompatActivity implements V
         dbController = new DatabaseController(getApplicationContext());
         listFood = new ArrayList<>();
         listMedicine = new ArrayList<>();
-        listMisc = new ArrayList<>();
+        listSocial = new ArrayList<>();
+        listFun = new ArrayList<>();
+        listStudy = new ArrayList<>();
+
         listMorning = new ArrayList<>();
         listAfternoon = new ArrayList<>();
         listEvening = new ArrayList<>();
         listDawn = new ArrayList<>();
         getIdsFromIntent();
         setupViews();
+        setupImages();
         setupButtons();
         setupRecycleViewLayouts();
         setViewAdapters();
@@ -88,15 +106,72 @@ public class DistributeActivitiesActivity extends AppCompatActivity implements V
 
     }
 
+    private void setupImages() {
+        imageViewMorning.setImageBitmap(decodeSampledBitmapFromResource(getResources(), R.drawable.manha, 200, 200));
+        imageViewAfternoon.setImageBitmap(decodeSampledBitmapFromResource(getResources(), R.drawable.tarde, 200, 200));
+        imageViewEvening.setImageBitmap(decodeSampledBitmapFromResource(getResources(), R.drawable.noite, 200, 200));
+        imageViewDawn.setImageBitmap(decodeSampledBitmapFromResource(getResources(), R.drawable.madrugada, 200, 200));
+    }
+
+
+
+    public static Bitmap decodeSampledBitmapFromResource(Resources res, int resId,
+                                                         int reqWidth, int reqHeight) {
+
+        // First decode with inJustDecodeBounds=true to check dimensions
+        final BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inJustDecodeBounds = true;
+        BitmapFactory.decodeResource(res, resId, options);
+
+        // Calculate inSampleSize
+        options.inSampleSize = calculateInSampleSize(options, reqWidth, reqHeight);
+
+        // Decode bitmap with inSampleSize set
+        options.inJustDecodeBounds = false;
+        options.inPurgeable = true;
+        return BitmapFactory.decodeResource(res, resId, options);
+    }
+
+    public static int calculateInSampleSize(
+            BitmapFactory.Options options, int reqWidth, int reqHeight) {
+        // Raw height and width of image
+        final int height = options.outHeight;
+        final int width = options.outWidth;
+        int inSampleSize = 1;
+
+        if (height > reqHeight || width > reqWidth) {
+
+            final int halfHeight = height / 2;
+            final int halfWidth = width / 2;
+
+            // Calculate the largest inSampleSize value that is a power of 2 and keeps both
+            // height and width larger than the requested height and width.
+            while ((halfHeight / inSampleSize) > reqHeight
+                    && (halfWidth / inSampleSize) > reqWidth) {
+                inSampleSize *= 2;
+            }
+        }
+
+        return inSampleSize;
+    }
+
     private void setupViews() {
         listViewFood = (RecyclerView) findViewById(R.id.listViewFoodDist);
         listViewMedicine = (RecyclerView) findViewById(R.id.listViewMedicineDist);
-        listViewMisc = (RecyclerView) findViewById(R.id.listViewMiscDist);
+        listViewSocial = (RecyclerView) findViewById(R.id.listViewSocialDist);
+        listViewFun = (RecyclerView) findViewById(R.id.listViewFunDist);
+        listViewStudy = (RecyclerView) findViewById(R.id.listViewStudyDist);
+
 
         listViewMorning = (RecyclerView) findViewById(R.id.listViewMorning);
         listViewAfternoon = (RecyclerView) findViewById(R.id.listViewAfternoon);
         listViewEvening = (RecyclerView) findViewById(R.id.listViewEvening);
         listViewDawn = (RecyclerView) findViewById(R.id.listViewDawn);
+
+        imageViewMorning = (ImageView) findViewById(R.id.image_morning);
+        imageViewAfternoon = (ImageView) findViewById(R.id.image_afternoon);
+        imageViewEvening = (ImageView) findViewById(R.id.image_evening);
+        imageViewDawn= (ImageView) findViewById(R.id.image_dawn);
 
     }
 
@@ -111,6 +186,7 @@ public class DistributeActivitiesActivity extends AppCompatActivity implements V
         Bundle extras = getIntent().getExtras();
         arrayUndistributedIds = extras.getIntArray("idList");
         profile_id = extras.getString("profile_id");
+        day_id = extras.getString("day_id");
 
         ArrayList<Activity> activities = dbController.readActivities();
 
@@ -122,10 +198,16 @@ public class DistributeActivitiesActivity extends AppCompatActivity implements V
                             listFood.add(a);
                             break;
                         case 2:
-                            listMedicine.add(a);
+                            listSocial.add(a);
                             break;
                         case 3:
-                            listMisc.add(a);
+                            listMedicine.add(a);
+                            break;
+                        case 4:
+                            listFun.add(a);
+                            break;
+                        case 5:
+                            listStudy.add(a);
                             break;
 
                     }
@@ -141,7 +223,9 @@ public class DistributeActivitiesActivity extends AppCompatActivity implements V
 
         ImageDragAdapter listFoodAdapter = (ImageDragAdapter)listViewFood.getAdapter();
         ImageDragAdapter listMedicineAdapter = (ImageDragAdapter)listViewMedicine.getAdapter();
-        ImageDragAdapter listMiscAdapter = (ImageDragAdapter)listViewMisc.getAdapter();
+        ImageDragAdapter listSocialAdapter = (ImageDragAdapter)listViewSocial.getAdapter();
+        ImageDragAdapter listFunAdapter = (ImageDragAdapter)listViewFun.getAdapter();
+        ImageDragAdapter listStudyAdapter = (ImageDragAdapter)listViewStudy.getAdapter();
 
         ImageDragAdapter listMorningAdapter = (ImageDragAdapter)listViewMorning.getAdapter();
         ImageDragAdapter listAfternoonAdapter = (ImageDragAdapter)listViewAfternoon.getAdapter();
@@ -164,26 +248,14 @@ public class DistributeActivitiesActivity extends AppCompatActivity implements V
         };
         listFoodAdapter.setOnLongItemClickListener(commonLongClickListener);
         listMedicineAdapter.setOnLongItemClickListener(commonLongClickListener);
-        listMiscAdapter.setOnLongItemClickListener(commonLongClickListener);
+        listSocialAdapter.setOnLongItemClickListener(commonLongClickListener);
+        listFunAdapter.setOnLongItemClickListener(commonLongClickListener);
+        listStudyAdapter.setOnLongItemClickListener(commonLongClickListener);
 
         listMorningAdapter.setOnLongItemClickListener(commonLongClickListener);
         listAfternoonAdapter.setOnLongItemClickListener(commonLongClickListener);
         listEveningAdapter.setOnLongItemClickListener(commonLongClickListener);
         listDawnAdapter.setOnLongItemClickListener(commonLongClickListener);
-
-
-        /*RecyclerItemClickListener commonListener = new RecyclerItemClickListener(getApplicationContext(), new RecyclerItemClickListener.OnItemClickListener() {
-            @Override
-            public void onItemClick(View view, int position) {
-                Object activity =  (((ImageAdapter) ((RecyclerView) view.getParent()).getAdapter()).getItem(position));
-                GridView gridViewActivities = (GridView)findViewById(R.id.gridViewActivities);
-                ((GridAdapter)gridViewActivities.getAdapter()).addItem(activity);
-            }
-        });
-        listViewFood.addOnItemTouchListener(commonListener);
-        listViewMedicine.addOnItemTouchListener(commonListener);
-        listViewMisc.addOnItemTouchListener(commonListener);
-        */
 
 
 
@@ -213,12 +285,20 @@ public class DistributeActivitiesActivity extends AppCompatActivity implements V
         saveList.addAll(((ImageDragAdapter)listViewMorning.getAdapter()).getItems());
         saveList.addAll(((ImageDragAdapter)listViewAfternoon.getAdapter()).getItems());
         saveList.addAll(((ImageDragAdapter)listViewEvening.getAdapter()).getItems());
-        saveList.addAll(((ImageDragAdapter)listViewDawn.getAdapter()).getItems());
+        saveList.addAll(((ImageDragAdapter) listViewDawn.getAdapter()).getItems());
 
         Day dayToSave = new Day(Integer.parseInt(profile_id), new Date(System.currentTimeMillis()),false);
         dayToSave.setListActivities(saveList);
+        if(day_id != null)
+            dayToSave.set_id(Integer.valueOf(day_id));
 
-        dbController.insertDay(dayToSave);
+        int day_id = dbController.insertDay(dayToSave);
+
+        Intent intent = new Intent();
+        intent.putExtra("day_id", String.valueOf(day_id));
+
+        setResult(RESULT_OK, intent);
+        finish();
 
         /*Intent intent = new Intent(getApplicationContext(), ChooseActivitiesActivity.class);
         startActivity(intent);*/
@@ -227,7 +307,9 @@ public class DistributeActivitiesActivity extends AppCompatActivity implements V
     private void setViewAdapters(){
         listViewFood.setAdapter(new ImageDragAdapter(listFood));//dbController.readActivities()
         listViewMedicine.setAdapter(new ImageDragAdapter(listMedicine));
-        listViewMisc.setAdapter(new ImageDragAdapter(listMisc));
+        listViewSocial.setAdapter(new ImageDragAdapter(listSocial));
+        listViewFun.setAdapter(new ImageDragAdapter(listFun));
+        listViewStudy.setAdapter(new ImageDragAdapter(listStudy));
 
 
         listViewMorning.setAdapter(new ImageDragAdapter(listMorning));
@@ -239,9 +321,11 @@ public class DistributeActivitiesActivity extends AppCompatActivity implements V
 
     private void setupRecycleViewLayouts(){
 
-        listViewFood.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        listViewMedicine.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
-        listViewMisc.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
+        listViewFood.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        listViewMedicine.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        listViewSocial.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        listViewFun.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
+        listViewStudy.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false));
 
         listViewMorning.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
         listViewAfternoon.setLayoutManager(new LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false));
