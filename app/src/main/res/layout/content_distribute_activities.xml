@@ -309,6 +309,8 @@
     </android.support.percent.PercentRelativeLayout>
 
     <Button
+        style="@style/btnStyleOrange"
+        android:textSize="@dimen/button_text_size"
         android:id="@+id/btnSaveDay"
         android:layout_width="0dp"
         android:layout_height="0dp"

@@ -13,12 +13,14 @@
     tools:showIn="@layout/activity_choose_activities">
 
     <Button
+        style="@style/btnStyleOrange"
+        android:layout_marginBottom="5dp"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         app:layout_heightPercent="8%"
         android:id="@+id/btnNext"
         android:text="@string/button_next"
-        android:textSize="28sp"
+        android:textSize="@dimen/button_text_size"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true" />
 

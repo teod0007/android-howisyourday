@@ -68,7 +68,8 @@ public class BeginRoutineActivity extends AppCompatActivity implements View.OnCl
         Intent intent = new Intent(getApplicationContext(), ShowActivitiesActivity.class);
         intent.putExtra("profile_id",profile_id);
         intent.putExtra("isFuture", true);
-        startActivityForResult(intent,2);
+        startActivityForResult(intent, 2);
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
     }
 
     private void btnNewDayClick(){
@@ -87,6 +88,7 @@ public class BeginRoutineActivity extends AppCompatActivity implements View.OnCl
                 intent.putExtra("profile_id",profile_id);
                 intent.putExtra("day_id", day_id);
                 intent.putExtra("isFuture", false);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
                 startActivityForResult(intent,2);
 
             }

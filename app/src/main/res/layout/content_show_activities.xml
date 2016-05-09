@@ -101,7 +101,7 @@
             android:id="@+id/listViewFoodShow"
             android:scrollbars="horizontal"
             android:background="@color/foodcolor"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"/>
 
         <android.support.v7.widget.RecyclerView
@@ -114,7 +114,7 @@
             android:id="@+id/listViewMedicineShow"
             android:scrollbars="horizontal"
             android:background="@color/medcolor"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"/>
 
         <android.support.v7.widget.RecyclerView
@@ -127,7 +127,7 @@
             android:id="@+id/listViewFunShow"
             android:scrollbars="horizontal"
             android:background="@color/funcolor"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"/>
 
         <android.support.v7.widget.RecyclerView
@@ -140,7 +140,7 @@
             android:id="@+id/listViewStudyShow"
             android:scrollbars="horizontal"
             android:background="@color/studycolor"
-            android:layout_marginTop="10dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="5dp"/>
 
         <android.support.v7.widget.RecyclerView
@@ -153,15 +153,17 @@
             android:id="@+id/listViewSocialShow"
             android:scrollbars="horizontal"
             android:background="@color/socialcolor"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="5dp"/>
 
         <Button
             android:id="@+id/btnEditDay"
+            style="@style/btnStyleOrange"
             android:layout_width="0dp"
             android:layout_height="0dp"
+            android:layout_marginTop="5dp"
             app:layout_heightPercent="10%"
             app:layout_widthPercent="100%"
-            android:textSize="28sp"
+            android:textSize="@dimen/button_text_size"
             android:text="@string/button_edit_day"
             android:layout_below="@id/listViewFoodShow"
             />

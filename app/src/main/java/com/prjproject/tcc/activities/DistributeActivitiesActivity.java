@@ -168,6 +168,17 @@ public class DistributeActivitiesActivity extends AppCompatActivity implements V
         listViewEvening = (RecyclerView) findViewById(R.id.listViewEvening);
         listViewDawn = (RecyclerView) findViewById(R.id.listViewDawn);
 
+        listViewFood.setHasFixedSize(true);
+        listViewMedicine.setHasFixedSize(true);
+        listViewSocial.setHasFixedSize(true);
+        listViewFun.setHasFixedSize(true);
+        listViewStudy.setHasFixedSize(true);
+
+        listViewMorning.setHasFixedSize(true);
+        listViewAfternoon.setHasFixedSize(true);
+        listViewEvening.setHasFixedSize(true);
+        listViewDawn.setHasFixedSize(true);
+
         imageViewMorning = (ImageView) findViewById(R.id.image_morning);
         imageViewAfternoon = (ImageView) findViewById(R.id.image_afternoon);
         imageViewEvening = (ImageView) findViewById(R.id.image_evening);
@@ -195,19 +206,19 @@ public class DistributeActivitiesActivity extends AppCompatActivity implements V
                 if(a.get_id() == arrayUndistributedIds[i]){
                     switch (a.getCategory_id()){
                         case 1:
-                            listFood.add(a);
+                            listFood.add(new Activity(a.get_id(),a.getActivityImage()));
                             break;
                         case 2:
-                            listSocial.add(a);
+                            listSocial.add(new Activity(a.get_id(),a.getActivityImage()));
                             break;
                         case 3:
-                            listMedicine.add(a);
+                            listMedicine.add(new Activity(a.get_id(),a.getActivityImage()));
                             break;
                         case 4:
-                            listFun.add(a);
+                            listFun.add(new Activity(a.get_id(),a.getActivityImage()));
                             break;
                         case 5:
-                            listStudy.add(a);
+                            listStudy.add(new Activity(a.get_id(),a.getActivityImage()));
                             break;
 
                     }

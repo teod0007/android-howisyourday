@@ -39,6 +39,15 @@ public class Activity {
         this.activityImage = activityImage;
     }
 
+    public Activity(int _id, Bitmap image) {
+        this._id = _id;
+        this.category_id = -1;
+        this.day_id = -1;
+        this.name = null;
+        this.dayPeriod = null;
+        this.activityImage = image;
+    }
+
     public int get_id() {
         return _id;
     }

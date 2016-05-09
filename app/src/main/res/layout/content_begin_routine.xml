@@ -13,33 +13,38 @@
     tools:showIn="@layout/activity_begin_routine">
 
     <Button
+        style="@style/btnStyleOrange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_future"
         android:id="@+id/btnFuture"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="200dp"
-        android:textSize="28sp"
+        android:textSize="@dimen/button_text_size"
         android:layout_alignLeft="@+id/btnPastDays"
         android:layout_alignStart="@+id/btnPastDays"
         android:layout_alignRight="@+id/btnPastDays"
         android:layout_alignEnd="@+id/btnPastDays" />
 
     <Button
+        style="@style/btnStyleOrange"
+        android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_past_days"
-        android:textSize="28sp"
+        android:textSize="@dimen/button_text_size"
         android:id="@+id/btnPastDays"
         android:layout_above="@+id/btnFuture"
         android:layout_centerHorizontal="true" />
 
     <Button
+        style="@style/btnStyleOrange"
+        android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_new_day"
         android:id="@+id/btnNewDay"
-        android:textSize="28sp"
+        android:textSize="@dimen/button_text_size"
         android:layout_above="@+id/btnPastDays"
         android:layout_alignRight="@+id/btnPastDays"
         android:layout_alignEnd="@+id/btnPastDays"

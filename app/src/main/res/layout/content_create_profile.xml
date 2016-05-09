@@ -13,11 +13,12 @@
     tools:showIn="@layout/activity_create_profile">
 
     <Button
+        style="@style/btnStyleOrange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_create"
         android:id="@+id/btnCreateProfile"
-        android:textSize="28sp"
+        android:textSize="@dimen/button_text_size"
         android:layout_alignParentBottom="true"
         android:layout_centerHorizontal="true"
         android:layout_marginBottom="105dp" />

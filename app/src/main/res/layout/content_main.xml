@@ -13,11 +13,12 @@
     tools:showIn="@layout/activity_main">
 
     <Button
+        style="@style/btnStyleOrange"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_begin_rotine"
         android:id="@+id/btnBeginRoutine"
-        android:textSize="28sp"
+        android:textSize="@dimen/button_text_size"
         android:layout_alignParentBottom="true"
         android:layout_marginBottom="79dp"
         android:layout_alignLeft="@+id/btnChangeProfile"
@@ -27,11 +28,13 @@
         android:enabled="false" />
 
     <Button
+        style="@style/btnStyleOrange"
+        android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_change_profile"
         android:id="@+id/btnChangeProfile"
-        android:textSize="28sp"
+        android:textSize="@dimen/button_text_size"
         android:layout_above="@+id/btnBeginRoutine"
         android:layout_alignRight="@+id/btnNewProfile"
         android:layout_alignEnd="@+id/btnNewProfile"
@@ -39,11 +42,13 @@
         android:layout_alignStart="@+id/btnNewProfile" />
 
     <Button
+        style="@style/btnStyleOrange"
+        android:layout_marginBottom="5dp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_new_profile"
         android:id="@+id/btnNewProfile"
-        android:textSize="28sp"
+        android:textSize="@dimen/button_text_size"
         android:layout_above="@+id/btnChangeProfile"
         android:layout_centerHorizontal="true" />
 
