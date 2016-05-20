@@ -30,7 +30,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/title_activity_choose_activities"
         android:id="@+id/txtTitleNewDay"
-        android:textSize="40sp"
+        android:textSize="@dimen/subtitle_small_text_size"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
         android:textColor="@color/titlecolor"
@@ -48,12 +48,12 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/category_food"
         android:id="@+id/txtCategoryFood"
-        android:textSize="20sp"
+        android:textSize="@dimen/category_name_text_size"
         android:layout_below="@+id/txtTitleNewDay"
         android:background="@color/foodcolor"
         android:gravity="center"
         android:padding="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="@dimen/item_margin_right_small"
         />
     <TextView
         android:layout_width="0dp"
@@ -63,13 +63,13 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/category_medicine"
         android:id="@+id/txtCategoryMedicine"
-        android:textSize="20sp"
+        android:textSize="@dimen/category_name_text_size"
         android:layout_below="@+id/txtTitleNewDay"
         android:layout_toRightOf="@+id/txtCategoryFood"
         android:background="@color/medcolor"
         android:gravity="center"
         android:padding="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="@dimen/item_margin_right_small"
         />
     <TextView
         android:layout_width="0dp"
@@ -79,13 +79,13 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/category_social"
         android:id="@+id/txtCategorySocial"
-        android:textSize="20sp"
+        android:textSize="@dimen/category_name_text_size"
         android:layout_below="@+id/txtTitleNewDay"
         android:layout_toRightOf="@+id/txtCategoryMedicine"
         android:background="@color/socialcolor"
         android:gravity="center"
         android:padding="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="@dimen/item_margin_right_small"
         />
     <TextView
         android:layout_width="0dp"
@@ -95,13 +95,13 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/category_fun"
         android:id="@+id/txtCategoryFun"
-        android:textSize="20sp"
+        android:textSize="@dimen/category_name_text_size"
         android:layout_below="@+id/txtTitleNewDay"
         android:layout_toRightOf="@+id/txtCategorySocial"
         android:background="@color/funcolor"
         android:gravity="center"
         android:padding="5dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="@dimen/item_margin_right_small"
         />
     <TextView
         android:layout_width="0dp"
@@ -111,7 +111,7 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="@string/category_study"
         android:id="@+id/txtCategoryStudy"
-        android:textSize="20sp"
+        android:textSize="@dimen/category_name_text_size"
         android:layout_below="@+id/txtTitleNewDay"
         android:layout_toRightOf="@+id/txtCategoryFun"
         android:background="@color/studycolor"
@@ -128,7 +128,7 @@
         android:layout_below="@+id/txtCategoryFood"
         android:scrollbars="vertical"
         android:layout_marginBottom="10dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="@dimen/item_margin_right_small"
         android:background="@color/foodcolor"/>
 
     <android.support.v7.widget.RecyclerView
@@ -141,7 +141,7 @@
         android:layout_toRightOf="@+id/listViewFood"
         android:scrollbars="vertical"
         android:layout_marginBottom="10dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="@dimen/item_margin_right_small"
         android:background="@color/medcolor"/>
 
     <android.support.v7.widget.RecyclerView
@@ -154,7 +154,7 @@
         android:layout_toRightOf="@+id/listViewMedicine"
         android:scrollbars="vertical"
         android:layout_marginBottom="10dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="@dimen/item_margin_right_small"
         android:background="@color/socialcolor"/>
 
     <android.support.v7.widget.RecyclerView
@@ -167,7 +167,7 @@
         android:layout_toRightOf="@+id/listViewSocial"
         android:scrollbars="vertical"
         android:layout_marginBottom="10dp"
-        android:layout_marginRight="5dp"
+        android:layout_marginRight="@dimen/item_margin_right_small"
         android:background="@color/funcolor"/>
 
     <android.support.v7.widget.RecyclerView

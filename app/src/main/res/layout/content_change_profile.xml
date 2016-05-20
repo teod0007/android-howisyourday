@@ -20,7 +20,7 @@
         android:id="@+id/txtChangeProfile"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:textSize="80sp"
+        android:textSize="@dimen/subtitle_text_size"
         android:textIsSelectable="false"
         android:textColor="@color/titlecolor"
         android:background="@drawable/border_shadow"
