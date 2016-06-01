@@ -29,7 +29,7 @@
 
     <Button
         style="@style/btnStyleOrange"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="@dimen/margin_between_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_change_profile"
@@ -43,7 +43,7 @@
 
     <Button
         style="@style/btnStyleOrange"
-        android:layout_marginBottom="5dp"
+        android:layout_marginBottom="@dimen/margin_between_buttons"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_new_profile"

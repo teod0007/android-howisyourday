@@ -3,11 +3,13 @@ package com.prjproject.tcc.activities;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.prjproject.tcc.R;
 import com.prjproject.tcc.adapters.DateAdapter;
@@ -26,8 +28,13 @@ public class ChooseDayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         dbController = new DatabaseController(getApplicationContext());
-
         setContentView(R.layout.activity_choose_day);
+
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/KGPrimaryWhimsy.ttf");
+        TextView txtTitle = (TextView) findViewById(R.id.txtChooseDay);
+        txtTitle.setTypeface(font);
+
+
         getIdsFromIntent();
         initViews();
         setupViewAdapters();

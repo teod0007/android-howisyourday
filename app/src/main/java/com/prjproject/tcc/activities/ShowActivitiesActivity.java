@@ -1,6 +1,7 @@
 package com.prjproject.tcc.activities;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.media.Image;
 import android.support.v7.app.AppCompatActivity;
@@ -13,6 +14,7 @@ import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageSwitcher;
 import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.ToggleButton;
 import android.widget.ViewSwitcher;
 
@@ -57,6 +59,10 @@ public class ShowActivitiesActivity extends AppCompatActivity implements View.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_show_activities);
         dbController = new DatabaseController(getApplicationContext());
+
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/KGPrimaryWhimsy.ttf");
+        TextView txtTitle = (TextView) findViewById(R.id.txtTitleDistribute);
+        txtTitle.setTypeface(font);
 
         getIdsFromIntent();
         setupViews();

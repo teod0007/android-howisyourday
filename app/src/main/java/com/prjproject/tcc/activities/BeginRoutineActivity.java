@@ -1,6 +1,7 @@
 package com.prjproject.tcc.activities;
 
 import android.content.Intent;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -20,6 +21,10 @@ public class BeginRoutineActivity extends AppCompatActivity implements View.OnCl
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_begin_routine);
+
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/KGPrimaryWhimsy.ttf");
+        TextView txtTitle = (TextView) findViewById(R.id.txtTitle2);
+        txtTitle.setTypeface(font);
 
         setupButtons();
         getIdsFromIntent();

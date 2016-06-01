@@ -2,6 +2,7 @@ package com.prjproject.tcc.activities;
 
 import android.content.Intent;
 import android.database.Cursor;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -10,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import com.prjproject.tcc.R;
 import com.prjproject.tcc.adapters.ProfileAdapter;
@@ -26,6 +28,10 @@ public class ChangeProfileActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_change_profile);
         dbController = new DatabaseController(getApplicationContext());
+
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/KGPrimaryWhimsy.ttf");
+        TextView txtTitle = (TextView) findViewById(R.id.txtChangeProfile);
+        txtTitle.setTypeface(font);
 
         initViews();
     }

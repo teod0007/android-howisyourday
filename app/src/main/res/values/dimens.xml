@@ -16,4 +16,5 @@
     <dimen name="item_margin_top_small">2dp</dimen>
     <dimen name="item_margin_right_small">1dp</dimen>
     <dimen name="profile_text_size">20sp</dimen>
+    <dimen name="margin_between_buttons">5dp</dimen>
 </resources>

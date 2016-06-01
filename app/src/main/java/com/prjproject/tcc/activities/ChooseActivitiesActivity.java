@@ -3,6 +3,7 @@ package com.prjproject.tcc.activities;
 import android.content.Intent;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
+import android.widget.TextView;
 
 import com.prjproject.tcc.R;
 import com.prjproject.tcc.adapters.GridAdapter;
@@ -55,6 +57,11 @@ public class ChooseActivitiesActivity extends AppCompatActivity implements View.
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_activities);
         dbController = new DatabaseController(getApplicationContext());
+
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/KGPrimaryWhimsy.ttf");
+        TextView txtTitle = (TextView) findViewById(R.id.txtTitleNewDay);
+        txtTitle.setTypeface(font);
+
         try {
             initViews();
             getActivitiesFromDB();

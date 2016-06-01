@@ -8,6 +8,7 @@ import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -23,6 +24,7 @@ import android.widget.Button;
 import android.widget.GridView;
 import android.widget.ImageButton;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.prjproject.tcc.R;
 import com.prjproject.tcc.adapters.GridAdapter;
@@ -76,6 +78,11 @@ public class DistributeActivitiesActivity extends AppCompatActivity implements V
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_distribute_activities);
         dbController = new DatabaseController(getApplicationContext());
+
+        Typeface font = Typeface.createFromAsset(getAssets(), "fonts/KGPrimaryWhimsy.ttf");
+        TextView txtTitle = (TextView) findViewById(R.id.txtTitleDistribute);
+        txtTitle.setTypeface(font);
+
         listFood = new ArrayList<>();
         listMedicine = new ArrayList<>();
         listSocial = new ArrayList<>();
