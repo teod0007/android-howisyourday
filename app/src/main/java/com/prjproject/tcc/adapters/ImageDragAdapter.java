@@ -41,7 +41,7 @@ public class ImageDragAdapter extends RecyclerView.Adapter{
     public RecyclerView.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         RecyclerView.ViewHolder viewHolder;
         LayoutInflater inflater = LayoutInflater.from(parent.getContext());
-        View v = inflater.inflate(R.layout.layout_view_holder, parent, false);
+        View v = inflater.inflate(R.layout.layout_view_holder_2, parent, false);
         viewHolder = new ViewHolderImage(v);
 
         return viewHolder;

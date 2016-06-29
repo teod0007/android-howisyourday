@@ -6,6 +6,12 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
+import android.graphics.Canvas;
+import android.graphics.Paint;
+import android.graphics.PorterDuff;
+import android.graphics.PorterDuffXfermode;
+import android.graphics.Rect;
+import android.graphics.RectF;
 
 import com.prjproject.tcc.model.Activity;
 import com.prjproject.tcc.model.Category;
@@ -165,7 +171,8 @@ public class DatabaseController {
             Bitmap image2 = Bitmap.createScaledBitmap(image, 100, 100, true);
             */
             Bitmap image2 = decodeSampledBitmapFromByteArray(image_bytes, 80, 80);
-            listActivities.add(new Activity(id,category_id,name,image2));
+            Bitmap image3 = getRoundedCornerBitmap(image2, 10);
+            listActivities.add(new Activity(id,category_id,name,image3));
             // The Cursor is now set to the right position
             //listActivities.add(mCursor.getWhateverTypeYouWant(WHATEVER_COLUMN_INDEX_YOU_WANT));
         }
@@ -240,7 +247,8 @@ public class DatabaseController {
                 Bitmap image2 = Bitmap.createScaledBitmap(image, 100, 100, true);
                 */
                 Bitmap image2 = decodeSampledBitmapFromByteArray(image_bytes, 80, 80);
-                listActivities.add(new Activity(id,category_id,name,image2));
+                Bitmap image3 = getRoundedCornerBitmap(image2, 10);
+                listActivities.add(new Activity(id,category_id,name,image3));
                 // The Cursor is now set to the right position
                 //listActivities.add(mCursor.getWhateverTypeYouWant(WHATEVER_COLUMN_INDEX_YOU_WANT));
             }
@@ -254,6 +262,28 @@ public class DatabaseController {
         }catch(Exception e){e.printStackTrace();}
 
         return listActivities;
+    }
+
+    public static Bitmap getRoundedCornerBitmap(Bitmap bitmap, int pixels) {
+        Bitmap output = Bitmap.createBitmap(bitmap.getWidth(), bitmap
+                .getHeight(), Bitmap.Config.ARGB_8888);
+        Canvas canvas = new Canvas(output);
+
+        final int color = 0xff424242;
+        final Paint paint = new Paint();
+        final Rect rect = new Rect(0, 0, bitmap.getWidth(), bitmap.getHeight());
+        final RectF rectF = new RectF(rect);
+        final float roundPx = pixels;
+
+        paint.setAntiAlias(true);
+        canvas.drawARGB(0, 0, 0, 0);
+        paint.setColor(color);
+        canvas.drawRoundRect(rectF, roundPx, roundPx, paint);
+
+        paint.setXfermode(new PorterDuffXfermode(PorterDuff.Mode.SRC_IN));
+        canvas.drawBitmap(bitmap, rect, rect, paint);
+
+        return output;
     }
 
     public int getDayId(long date, String profile_id){
@@ -320,7 +350,8 @@ public class DatabaseController {
                 Bitmap image2 = Bitmap.createScaledBitmap(image, 100, 100, true);
                 */
                 Bitmap image2 = decodeSampledBitmapFromByteArray(image_bytes, 80, 80);
-                listActivities.add(new Activity(id,category_id,name,image2,day_period));
+                Bitmap image3 = getRoundedCornerBitmap(image2, 10);
+                listActivities.add(new Activity(id,category_id,name,image3,day_period));
                 // The Cursor is now set to the right position
                 //listActivities.add(mCursor.getWhateverTypeYouWant(WHATEVER_COLUMN_INDEX_YOU_WANT));
             }

@@ -12,6 +12,23 @@
     tools:context=".activities.CreateProfileActivity"
     tools:showIn="@layout/activity_create_profile">
 
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/title_activity_create_profile"
+        android:id="@+id/txtCreateProfile"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:textSize="@dimen/subtitle_text_size"
+        android:textIsSelectable="false"
+        android:textColor="@color/titlecolor"
+        android:background="@drawable/border_shadow"
+        android:padding="5dp"
+        android:layout_marginBottom="10dp"
+        android:gravity="center"
+        />
+
     <Button
         style="@style/btnStyleOrange"
         android:layout_width="wrap_content"

@@ -1,7 +1,7 @@
 <resources>
-    <string name="app_name">tcc</string>
+    <string name="app_name">Como foi meu dia?</string>
     <string name="action_settings">Settings</string>
-    <string name="title_activity_create_profile">CreateProfileActivity</string>
+    <string name="title_activity_create_profile">Digite o nome do perfil</string>
     <string name="app_title">Como foi meu dia?</string>
     <string name="button_create">Criar</string>
     <string name="button_new_profile">Criar novo perfil</string>

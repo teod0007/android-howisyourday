@@ -84,76 +84,159 @@
             android:id="@+id/imageSwitcherDayPeriod"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            app:layout_heightPercent="50%"
-            app:layout_widthPercent="100%"
+            app:layout_heightPercent="40%"
+            app:layout_widthPercent="90%"
             android:layout_centerHorizontal="true"
             android:layout_centerVertical="true"
             android:layout_below="@id/btnToggleMorning"
             android:layout_marginTop="@dimen/item_margin_large">
         </ImageSwitcher>
 
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="7%"
+            app:layout_widthPercent="19.5%"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/category_food"
+            android:id="@+id/txtCategoryFood"
+            android:textSize="@dimen/category_name_text_size"
+            android:layout_below="@+id/imageSwitcherDayPeriod"
+            android:background="@color/foodcolor"
+            android:gravity="center"
+            android:padding="5dp"
+            android:layout_marginTop="@dimen/item_margin_top_small"
+            android:layout_marginRight="@dimen/item_margin_right_small"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="7%"
+            app:layout_widthPercent="19.5%"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/category_medicine"
+            android:id="@+id/txtCategoryMedicine"
+            android:textSize="@dimen/category_name_text_size"
+            android:layout_below="@+id/imageSwitcherDayPeriod"
+            android:layout_toRightOf="@+id/txtCategoryFood"
+            android:background="@color/medcolor"
+            android:gravity="center"
+            android:padding="5dp"
+            android:layout_marginTop="@dimen/item_margin_top_small"
+            android:layout_marginRight="@dimen/item_margin_right_small"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="7%"
+            app:layout_widthPercent="19.5%"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/category_fun"
+            android:id="@+id/txtCategoryFun"
+            android:textSize="@dimen/category_name_text_size"
+            android:layout_below="@+id/imageSwitcherDayPeriod"
+            android:layout_toRightOf="@+id/txtCategoryMedicine"
+            android:background="@color/funcolor"
+            android:gravity="center"
+            android:padding="5dp"
+            android:layout_marginTop="@dimen/item_margin_top_small"
+            android:layout_marginRight="@dimen/item_margin_right_small"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="7%"
+            app:layout_widthPercent="19.5%"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/category_study"
+            android:id="@+id/txtCategoryStudy"
+            android:textSize="@dimen/category_name_text_size"
+            android:layout_below="@+id/imageSwitcherDayPeriod"
+            android:layout_toRightOf="@+id/txtCategoryFun"
+            android:background="@color/studycolor"
+            android:gravity="center"
+            android:padding="5dp"
+            android:layout_marginTop="@dimen/item_margin_top_small"
+            android:layout_marginRight="@dimen/item_margin_right_small"
+            />
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            app:layout_heightPercent="7%"
+            app:layout_widthPercent="19.5%"
+            android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="@string/category_social"
+            android:id="@+id/txtCategorySocial"
+            android:textSize="@dimen/category_name_text_size"
+            android:layout_below="@+id/imageSwitcherDayPeriod"
+            android:layout_toRightOf="@+id/txtCategoryStudy"
+            android:background="@color/socialcolor"
+            android:gravity="center"
+            android:padding="5dp"
+            android:layout_marginTop="@dimen/item_margin_top_small"
+            />
+
         <android.support.v7.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_heightPercent="25%"
-            app:layout_widthPercent="20%"
-            android:layout_below="@id/imageSwitcherDayPeriod"
+            app:layout_widthPercent="19.5%"
+            android:layout_below="@id/txtCategoryFood"
             android:id="@+id/listViewFoodShow"
             android:scrollbars="horizontal"
             android:background="@color/foodcolor"
-            android:layout_marginTop="@dimen/item_margin_top_small"
             android:layout_marginRight="@dimen/item_margin_right_small"/>
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_heightPercent="25%"
-            app:layout_widthPercent="20%"
-            android:layout_below="@id/imageSwitcherDayPeriod"
+            app:layout_widthPercent="19.5%"
+            android:layout_below="@id/txtCategoryFood"
             android:layout_toRightOf="@id/listViewFoodShow"
             android:id="@+id/listViewMedicineShow"
             android:scrollbars="horizontal"
             android:background="@color/medcolor"
-            android:layout_marginTop="@dimen/item_margin_top_small"
             android:layout_marginRight="@dimen/item_margin_right_small"/>
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_heightPercent="25%"
-            app:layout_widthPercent="20%"
-            android:layout_below="@id/imageSwitcherDayPeriod"
+            app:layout_widthPercent="19.5%"
+            android:layout_below="@id/txtCategoryFood"
             android:layout_toRightOf="@id/listViewMedicineShow"
             android:id="@+id/listViewFunShow"
             android:scrollbars="horizontal"
             android:background="@color/funcolor"
-            android:layout_marginTop="@dimen/item_margin_top_small"
             android:layout_marginRight="@dimen/item_margin_right_small"/>
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_heightPercent="25%"
-            app:layout_widthPercent="20%"
-            android:layout_below="@id/imageSwitcherDayPeriod"
+            app:layout_widthPercent="19.5%"
+            android:layout_below="@id/txtCategoryFood"
             android:layout_toRightOf="@id/listViewFunShow"
             android:id="@+id/listViewStudyShow"
             android:scrollbars="horizontal"
             android:background="@color/studycolor"
-            android:layout_marginTop="@dimen/item_margin_top_small"
             android:layout_marginRight="@dimen/item_margin_right_small"/>
 
         <android.support.v7.widget.RecyclerView
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_heightPercent="25%"
-            app:layout_widthPercent="20%"
-            android:layout_below="@id/imageSwitcherDayPeriod"
+            app:layout_widthPercent="19.5%"
+            android:layout_below="@id/txtCategoryFood"
             android:layout_toRightOf="@id/listViewStudyShow"
             android:id="@+id/listViewSocialShow"
             android:scrollbars="horizontal"
-            android:background="@color/socialcolor"
-            android:layout_marginTop="@dimen/item_margin_top_small"/>
+            android:background="@color/socialcolor"/>
 
         <Button
             android:id="@+id/btnEditDay"

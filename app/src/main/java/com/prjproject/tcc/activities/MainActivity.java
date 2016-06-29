@@ -56,7 +56,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 btnBeginRoutineClick();
                 break;
             case R.id.txtTitle:
-                startDatabaseManager();
+                //startDatabaseManager();
                 break;
         }
     }
